@@ -1,0 +1,11 @@
+/* 
+  Accessibility.strings
+  QueroSerMBDesafio
+
+  Created by Felipe Perius on 05/11/20.
+  
+*/
+"navigationApplicaton" = "Navigation View";
+"assetList" = "Asset List";
+"assetCell" = "Asset Cell";
+"assetDetail" = "Asset Detail";

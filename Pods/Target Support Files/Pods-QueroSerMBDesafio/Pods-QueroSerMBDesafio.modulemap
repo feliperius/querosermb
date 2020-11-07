@@ -1,0 +1,6 @@
+module Pods_QueroSerMBDesafio {
+  umbrella header "Pods-QueroSerMBDesafio-umbrella.h"
+
+  export *
+  module * { export * }
+}

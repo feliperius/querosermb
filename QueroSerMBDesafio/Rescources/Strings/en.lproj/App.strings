@@ -1,0 +1,13 @@
+/* 
+  App.strings
+  QueroSerMBDesafio
+
+  Created by Felipe Perius on 05/11/20.
+  
+*/
+"homeTitle" = "Overview";
+//ERROS
+"apiNotAvailable" = "Please try again later.";
+"mapping" = "An unexpected error occurred while communicating with the server.";
+"offline" = "You are currently offline.";
+"other" = "An unexpected error has occurred.";

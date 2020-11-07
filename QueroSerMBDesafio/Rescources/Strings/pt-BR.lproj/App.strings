@@ -1,0 +1,13 @@
+/* 
+  App.strings
+  QueroSerMBDesafio
+
+  Created by Felipe Perius on 05/11/20.
+  
+*/
+"homeTitle" = "Visão Geral";
+//ERROS
+"apiNotAvailableMessage" = "Por favor tente mais tarde.";
+"mapping" = "Ocorreu um erro inesperado ao se comunicar com o servidor.";
+"offline" = "Você está offline no momento.";
+"other" = "Ocorreu um erro inesperado.";

@@ -1,0 +1,77 @@
+PODS:
+  - Alamofire (5.4.0)
+  - FBSnapshotTestCase (2.1.4):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
+  - FBSnapshotTestCase/Core (2.1.4)
+  - FBSnapshotTestCase/SwiftSupport (2.1.4):
+    - FBSnapshotTestCase/Core
+  - iOSSnapshotTestCase (6.2.0):
+    - iOSSnapshotTestCase/SwiftSupport (= 6.2.0)
+  - iOSSnapshotTestCase/Core (6.2.0)
+  - iOSSnapshotTestCase/SwiftSupport (6.2.0):
+    - iOSSnapshotTestCase/Core
+  - KIF (3.7.12):
+    - KIF/Core (= 3.7.12)
+  - KIF/Core (3.7.12)
+  - Kingfisher (5.15.7):
+    - Kingfisher/Core (= 5.15.7)
+  - Kingfisher/Core (5.15.7)
+  - Nimble (9.0.0)
+  - Nimble-Snapshots (9.0.0):
+    - Nimble-Snapshots/Core (= 9.0.0)
+  - Nimble-Snapshots/Core (9.0.0):
+    - iOSSnapshotTestCase (~> 6.0)
+    - Nimble
+  - NVActivityIndicatorView (5.1.1):
+    - NVActivityIndicatorView/Base (= 5.1.1)
+  - NVActivityIndicatorView/Base (5.1.1)
+  - Quick (3.0.0)
+  - R.swift (5.2.2):
+    - R.swift.Library (~> 5.2.0)
+  - R.swift.Library (5.2.0)
+  - SnapKit (5.0.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - FBSnapshotTestCase
+  - KIF
+  - Kingfisher
+  - Nimble
+  - Nimble-Snapshots
+  - NVActivityIndicatorView
+  - Quick
+  - R.swift
+  - SnapKit
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - FBSnapshotTestCase
+    - iOSSnapshotTestCase
+    - KIF
+    - Kingfisher
+    - Nimble
+    - Nimble-Snapshots
+    - NVActivityIndicatorView
+    - Quick
+    - R.swift
+    - R.swift.Library
+    - SnapKit
+
+SPEC CHECKSUMS:
+  Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
+  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+  iOSSnapshotTestCase: 9ab44cb5aa62b84d31847f40680112e15ec579a6
+  KIF: c71cc117944d8e6c807bfccbe675060caae79d60
+  Kingfisher: 6e1a13523fcb1c86924ce53affe4ac957e544d59
+  Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
+  Nimble-Snapshots: 36b027fd637b3e405ddc8362203d9dad3f5405fd
+  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
+  Quick: 6d9559f40647bc4d510103842ef2fdd882d753e2
+  R.swift: 7c52cdc57a66840ffe6cbd8a823d732059d42a32
+  R.swift.Library: 5ba4f1631300caf9a4d890186930da85d540769d
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+
+PODFILE CHECKSUM: 0b2bf9455750794f70a63f543f8a57b170e14c26
+
+COCOAPODS: 1.10.0

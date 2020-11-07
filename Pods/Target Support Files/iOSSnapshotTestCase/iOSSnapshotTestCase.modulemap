@@ -1,0 +1,7 @@
+module FBSnapshotTestCase {
+  umbrella header "iOSSnapshotTestCase-umbrella.h"
+  exclude header "FBSnapshotTestCase-umbrella.h"
+
+  export *
+  module * { export * }
+}
