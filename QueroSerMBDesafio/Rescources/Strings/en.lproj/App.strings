@@ -7,7 +7,9 @@
 */
 "homeTitle" = "Overview";
 //ERROS
+"error" = "erro";
 "apiNotAvailable" = "Please try again later.";
 "mapping" = "An unexpected error occurred while communicating with the server.";
 "offline" = "You are currently offline.";
 "other" = "An unexpected error has occurred.";
+

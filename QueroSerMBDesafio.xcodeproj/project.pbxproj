@@ -47,10 +47,11 @@
 		FFC92A2025560D6F00B6248C /* AssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC92A1F25560D6F00B6248C /* AssetTableViewCell.swift */; };
 		FFC92A2825560E4A00B6248C /* UIStackView+RemoveAllArranged.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC92A2725560E4A00B6248C /* UIStackView+RemoveAllArranged.swift */; };
 		FFC92A3325560FB900B6248C /* AssetExtraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC92A3225560FB900B6248C /* AssetExtraView.swift */; };
-		FFC92A68255613EF00B6248C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC92A67255613EF00B6248C /* R.generated.swift */; };
 		FFC92A7C2556168F00B6248C /* HomeDataScource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC92A7B2556168F00B6248C /* HomeDataScource.swift */; };
 		FFC92A852556176100B6248C /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC92A842556176100B6248C /* HomePresenter.swift */; };
 		FFC92A8A255618F700B6248C /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC92A89255618F700B6248C /* HomeInteractor.swift */; };
+		FFC92ABD2556352F00B6248C /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC92ABC2556352F00B6248C /* Dynamic.swift */; };
+		FFC92AE32556427C00B6248C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC92AE22556427C00B6248C /* R.generated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,10 +128,11 @@
 		FFC92A1F25560D6F00B6248C /* AssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetTableViewCell.swift; sourceTree = "<group>"; };
 		FFC92A2725560E4A00B6248C /* UIStackView+RemoveAllArranged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+RemoveAllArranged.swift"; sourceTree = "<group>"; };
 		FFC92A3225560FB900B6248C /* AssetExtraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetExtraView.swift; sourceTree = "<group>"; };
-		FFC92A67255613EF00B6248C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		FFC92A7B2556168F00B6248C /* HomeDataScource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataScource.swift; sourceTree = "<group>"; };
 		FFC92A842556176100B6248C /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		FFC92A89255618F700B6248C /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
+		FFC92ABC2556352F00B6248C /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
+		FFC92AE22556427C00B6248C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,7 +223,7 @@
 				FF2A52C525547E2D0095EA87 /* Service */,
 				FF2A5287255470F50095EA87 /* Rescources */,
 				FF2A524925546A370095EA87 /* Info.plist */,
-				FFC92A67255613EF00B6248C /* R.generated.swift */,
+				FFC92AE22556427C00B6248C /* R.generated.swift */,
 				FF2A523B25546A350095EA87 /* AppDelegate.swift */,
 			);
 			path = QueroSerMBDesafio;
@@ -320,6 +322,7 @@
 				FF2A52FA255489FE0095EA87 /* UITableView+Reusable.swift */,
 				FF2A533B2554CD090095EA87 /* UIViewController+MB.swift */,
 				FFC92A2725560E4A00B6248C /* UIStackView+RemoveAllArranged.swift */,
+				FFC92ABC2556352F00B6248C /* Dynamic.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -703,11 +706,13 @@
 				FF2A53372554CB290095EA87 /* BaseCoordinator.swift in Sources */,
 				FF2A53262554C9440095EA87 /* BaseViewController.swift in Sources */,
 				FFC92A062556026400B6248C /* AssetService.swift in Sources */,
+				FFC92AE32556427C00B6248C /* R.generated.swift in Sources */,
 				FFC92A852556176100B6248C /* HomePresenter.swift in Sources */,
 				FFC929882555EEF900B6248C /* RequestManager.swift in Sources */,
 				FFC92A8A255618F700B6248C /* HomeInteractor.swift in Sources */,
 				FF53BFBC2554E22D001B62D7 /* HomeDelegate.swift in Sources */,
 				FFC929922555F4EB00B6248C /* NetworkError.swift in Sources */,
+				FFC92ABD2556352F00B6248C /* Dynamic.swift in Sources */,
 				FF53BFC42554E27E001B62D7 /* Asset.swift in Sources */,
 				FF2A5316255497C60095EA87 /* HomeCoordinator.swift in Sources */,
 				FF2A530025548B220095EA87 /* ColorTheme.swift in Sources */,
@@ -721,7 +726,6 @@
 				FF2A52CE255481E90095EA87 /* MBNavigationController.swift in Sources */,
 				FF2A52FB255489FE0095EA87 /* UITableView+Reusable.swift in Sources */,
 				FF2A52C725547F7C0095EA87 /* ApplicationCoordinator.swift in Sources */,
-				FFC92A68255613EF00B6248C /* R.generated.swift in Sources */,
 				FFC92A7C2556168F00B6248C /* HomeDataScource.swift in Sources */,
 				FFC92A2825560E4A00B6248C /* UIStackView+RemoveAllArranged.swift in Sources */,
 				FFC92A2025560D6F00B6248C /* AssetTableViewCell.swift in Sources */,

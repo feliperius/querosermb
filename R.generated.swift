@@ -190,7 +190,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
 
-    /// This `R.string.app` struct is generated, and contains static references to 5 localization keys.
+    /// This `R.string.app` struct is generated, and contains static references to 6 localization keys.
     struct app {
       /// en translation: An unexpected error has occurred.
       ///
@@ -212,6 +212,10 @@ struct R: Rswift.Validatable {
       ///
       /// Locales: en, pt-BR
       static let offline = Rswift.StringResource(key: "offline", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
+      /// en translation: erro
+      ///
+      /// Locales: en, pt-BR
+      static let error = Rswift.StringResource(key: "error", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
 
       /// en translation: An unexpected error has occurred.
       ///
@@ -286,6 +290,21 @@ struct R: Rswift.Validatable {
         }
 
         return NSLocalizedString("offline", tableName: "App", bundle: bundle, comment: "")
+      }
+
+      /// en translation: erro
+      ///
+      /// Locales: en, pt-BR
+      static func error(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error", tableName: "App", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "App", preferredLanguages: preferredLanguages) else {
+          return "error"
+        }
+
+        return NSLocalizedString("error", tableName: "App", bundle: bundle, comment: "")
       }
 
       fileprivate init() {}

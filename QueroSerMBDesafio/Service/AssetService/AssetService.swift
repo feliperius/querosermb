@@ -19,8 +19,8 @@ extension AssetService: ApiClient {
         getRequest.get(url: AssetEndpoints.getAssets.path) { (data, error) in
             let result = RequestManager<Asset>().generate(data, error)
             switch result {
-            case .success(let exchanges):
-                onSuccess(exchanges)
+            case .success(let assets):
+                onSuccess(assets)
             case .failure(let error):
                 onError(error)
             }

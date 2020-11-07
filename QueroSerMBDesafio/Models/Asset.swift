@@ -9,7 +9,6 @@ import Foundation
 
 struct Asset: Decodable {
     let assetId: String
-    let website: String
     let name: String
     let typeIsCrypto: Int
     let dataStart: String
@@ -30,18 +29,17 @@ struct Asset: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         assetId = try container.decode(String.self, forKey: .assetId)
-        website = try container.decode(String.self, forKey: .website)
-        name = try container.decode(String.self, forKey: .name)
+        name = (try? container.decode(String.self, forKey: .name)) ?? ""
         typeIsCrypto = (try? container.decode(Int.self, forKey: .typeIsCrypto)) ?? 0
-        dataStart = (try? container.decode(String.self, forKey: .dataStart)) ?? ""
-        dataEnd = (try? container.decode(String.self, forKey: .dataEnd)) ?? ""
-        dataQuoteStart = (try? container.decode(String.self, forKey: .dataQuoteStart)) ?? ""
-        dataQuoteEnd = (try? container.decode(String.self, forKey: .dataQuoteEnd)) ?? ""
-        dataOrderbookStart = (try? container.decode(String.self, forKey: .dataOrderbookStart)) ?? ""
-        dataOrderbookEnd = (try? container.decode(String.self, forKey: .dataOrderbookEnd)) ?? ""
-        dataTradeStart = (try? container.decode(String.self, forKey: .dataTradeStart)) ?? ""
-        dataTradeEnd = (try? container.decode(String.self, forKey: .dataTradeEnd)) ?? ""
         dataSymbolsCount = (try? container.decode(Int.self, forKey: .dataSymbolsCount)) ?? 0
+        dataStart = (try? container.decode(String.self, forKey: .dataStart)) ?? " "
+        dataEnd = (try? container.decode(String.self, forKey: .dataEnd)) ?? " "
+        dataQuoteStart = (try? container.decode(String.self, forKey: .dataQuoteStart)) ?? " "
+        dataQuoteEnd = (try? container.decode(String.self, forKey: .dataQuoteEnd)) ?? " "
+        dataOrderbookStart = (try? container.decode(String.self, forKey: .dataOrderbookStart)) ?? " "
+        dataOrderbookEnd = (try? container.decode(String.self, forKey: .dataOrderbookEnd)) ?? " "
+        dataTradeStart = (try? container.decode(String.self, forKey: .dataTradeStart)) ?? " "
+        dataTradeEnd = (try? container.decode(String.self, forKey: .dataTradeEnd)) ?? " "
         volume1HrsUsd = (try? container.decode(Double.self, forKey: .volume1HrsUsd)) ?? 0.0
         volume1DayUsd = (try? container.decode(Double.self, forKey: .volume1DayUsd)) ?? 0.0
         volume1MthUsd = (try? container.decode(Double.self, forKey: .volume1MthUsd)) ?? 0.0
@@ -50,7 +48,6 @@ struct Asset: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case assetId = "asset_id"
-        case website
         case name
         case typeIsCrypto = "type_is_crypto"
         case dataStart = "data_start"
@@ -69,3 +66,4 @@ struct Asset: Decodable {
     }
 
 }
+

@@ -7,6 +7,7 @@
 */
 "homeTitle" = "Visão Geral";
 //ERROS
+"error" = "erro";
 "apiNotAvailableMessage" = "Por favor tente mais tarde.";
 "mapping" = "Ocorreu um erro inesperado ao se comunicar com o servidor.";
 "offline" = "Você está offline no momento.";

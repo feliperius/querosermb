@@ -12,16 +12,16 @@ protocol Coordinator: class {
 
 final class ApplicationCoordinator: Coordinator {
     private let window: UIWindow
-    private let rootNavigationViewController: UINavigationController
+    private let rootNavigationViewController: MBNavigationController
     private let assetService: AssetService
     private lazy var homeCoordinator: HomeCoordinator = {
-        HomeCoordinator(navigationController: rootNavigationViewController)
+        HomeCoordinator(navigationController: rootNavigationViewController, service: assetService)
     }()
     
     init(with window: UIWindow, service: AssetService) {
         self.window = window
         assetService = service
-        rootNavigationViewController = UINavigationController()
+        rootNavigationViewController = MBNavigationController()
         window.rootViewController = rootNavigationViewController
     }
     

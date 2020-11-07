@@ -11,16 +11,19 @@ final class HomeCoordinator {
     private let navigationController: UINavigationController
     private let assetService: AssetService
     private lazy var homeViewController: HomeViewController = {
-        let viewController = HomeViewController(delegate: self, service: assetService)
+        let viewController = HomeViewController(delegate: self, assetService: assetService)
         return viewController
     }()
-
-
+    
     init(navigationController: UINavigationController,service: AssetService) {
         self.navigationController = navigationController
         self.assetService = service
+        setupNavigationView()
     }
-
+    
+    private func setupNavigationView() {
+        navigationController.view.accessibilityLabel = R.string.accessibility.navigationApplicaton()
+    }
 }
 
 extension HomeCoordinator: Coordinator {

@@ -5,6 +5,7 @@
 //  Created by Felipe Perius on 06/11/20.
 //
 
+import Foundation
 import UIKit
 
 final class HomeDataScource: NSObject {
@@ -27,9 +28,7 @@ final class HomeDataScource: NSObject {
         self.tableView = tableView
         self.completion = completion
         self.completionRefresh = completionRefresh
-        
         super.init()
-        
         registerCells()
         setupDataSource()
         setupPullToRefresh()
@@ -65,14 +64,12 @@ extension HomeDataScource: UITableViewDataSource {
         let cell: AssetTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
         let viewModel = viewModels[indexPath.row]
         cell.bind(viewModel: viewModel)
-        
         return cell
     }
     
 }
 
 extension HomeDataScource: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
