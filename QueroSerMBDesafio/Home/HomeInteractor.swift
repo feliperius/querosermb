@@ -17,12 +17,11 @@ final class HomeInteractor {
     }
     
     func loadAssets() {
-        presenter?.showLoading()
         apiClientService.assets(onSuccess: { [weak self] assets in
             let viewModels = assets.map(AssetViewModel.init)
             self?.presenter?.fetchAssets(viewModels: viewModels)
-            self?.loadAssetIcons(assetsViewModels: viewModels)
             self?.presenter?.hideLoading()
+            self?.loadAssetIcons(assetsViewModels: viewModels)
         }) { [weak self] error in
             self?.presenter?.onError(message: error.localizedDescription)
             self?.presenter?.hideLoading()
@@ -30,6 +29,7 @@ final class HomeInteractor {
     }
     
     private func loadAssetIcons(assetsViewModels: [AssetViewModel]) {
+        self.presenter?.showLoading()
         apiClientService.icons { [weak self] (icons) in
             var viewModels: [AssetViewModel] = []
             assetsViewModels.forEach { viewModel in
@@ -38,6 +38,7 @@ final class HomeInteractor {
                 }
                 viewModels.append(AssetViewModel(entity: assetIcon, viewModel: viewModel))
             }
+            self?.presenter?.hideLoading()
             self?.presenter?.fetchAssets(viewModels: viewModels)
         }
     }

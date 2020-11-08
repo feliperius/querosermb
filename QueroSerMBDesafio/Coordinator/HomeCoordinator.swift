@@ -23,6 +23,7 @@ final class HomeCoordinator {
     
     private func setupNavigationView() {
         navigationController.view.accessibilityLabel = R.string.accessibility.navigationApplicaton()
+        navigationController.title = R.string.app.homeTitle()
     }
 }
 
@@ -33,7 +34,13 @@ extension HomeCoordinator: Coordinator {
 }
 extension HomeCoordinator: HomeDelegate {
     func didSelect(viewModel: AssetViewModel) {
-        
+        let assetDetailViewController = AssetDetailViewController()
+        assetDetailViewController.viewModel = viewModel
+        if #available(iOS 13.0, *) {
+            navigationController.present(assetDetailViewController, animated: true)
+        } else {
+            navigationController.pushViewController(assetDetailViewController, animated: true)
+        }
     }
 }
 

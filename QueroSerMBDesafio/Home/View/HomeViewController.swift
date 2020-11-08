@@ -5,11 +5,10 @@
 //  Created by Felipe Perius on 05/11/20.
 //
 import UIKit
-import NVActivityIndicatorView
 
-final class HomeViewController: UIViewController {
+
+final class HomeViewController: BaseViewController {
     private let tableView  = UITableView()
-    private let loadingView = NVActivityIndicatorView(frame: .zero)
     
     private lazy var dataSource: HomeDataScource = {
         let completion: HomeDataScource.CompletionHandler = { [weak self] in
@@ -17,7 +16,7 @@ final class HomeViewController: UIViewController {
         }
         
         let completionRefresh: HomeDataScource.CompletionHandlerRefresh = { [weak self] in
-            self?.loadAssets()
+            self?.pullToRefresh()
         }
         
         let dataSource = HomeDataScource(tableView: tableView,
@@ -61,6 +60,7 @@ final class HomeViewController: UIViewController {
     
     private func setupView() {
         view.accessibilityLabel = R.string.accessibility.assetList()
+        view.backgroundColor = ColorTheme.backgroundMain
     }
     
     private func setupLayout() {
@@ -70,22 +70,23 @@ final class HomeViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
-        view.addSubview(loadingView, constraints: [
-            loadingView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loadingView.widthAnchor.constraint(equalToConstant: 50),
-            loadingView.heightAnchor.constraint(equalToConstant: 50)
-        ])
     }
     
     private func loadAssets() {
+        showLoading()
         interactor.loadAssets()
+    }
+    
+    private func pullToRefresh() {
+        if self.dataSource.viewModels.isEmpty {
+            interactor.loadAssets()
+        }
     }
     
     private func didSelect(viewModel: AssetViewModel) {
         delegate.didSelect(viewModel: viewModel)
     }
+    
 }
 extension HomeViewController: HomePresenter {
     func fetchAssets(viewModels: [AssetViewModel]) {
@@ -98,11 +99,38 @@ extension HomeViewController: HomePresenter {
     }
     
     func showLoading() {
-        loadingView.startAnimating()
+        self.displayLoading()
     }
     
     func hideLoading() {
-        loadingView.stopAnimating()
+        self.dismissLoading()
     }
-    
+}
+extension UITableViewCell {
+    func applyConfig(for indexPath: IndexPath, numberOfCellsInSection: Int) {
+        switch indexPath.row {
+        case numberOfCellsInSection - 1:
+            self.roundCorners(.bottom, radius: 15)
+            
+            if numberOfCellsInSection == 1 {
+                self.roundCorners(.all, radius: 15)
+            }
+        case 0:
+            self.roundCorners(.top, radius: 15)
+            
+        default:
+            self.roundCorners(.all, radius: 0)
+        }
+        
+        if indexPath.row != 0 {
+            let bottomBorder = CALayer()
+            
+            bottomBorder.frame = CGRect(x: 16.0,
+                                        y: 0,
+                                        width: self.contentView.frame.size.width - 16,
+                                        height: 0.2)
+            bottomBorder.backgroundColor = UIColor(white: 0.8, alpha: 1.0).cgColor
+            self.contentView.layer.addSublayer(bottomBorder)
+        }
+    }
 }

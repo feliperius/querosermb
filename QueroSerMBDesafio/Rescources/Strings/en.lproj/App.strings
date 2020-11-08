@@ -12,4 +12,15 @@
 "mapping" = "An unexpected error occurred while communicating with the server.";
 "offline" = "You are currently offline.";
 "other" = "An unexpected error has occurred.";
+//Cell
+"lastNegotiation" = "Last negotiation";
+"totalSymbols" = "Total symbols";
+"sumAnHour" = "Sum of an Hour";
+"firstQuotation" = "First quotation";
+"lastQuotation" = "Last quotation";
+"firstPurchaseOrder" = "First purchase order";
+"lastPurchaseOrder" = "Last purchase order";
+"firstNegotiation" = "First negotiation";
+"SumAnday" = "Sum of an day";
+"SumMonth" = "Summation one month";
 

@@ -2,12 +2,12 @@ platform :ios, '11.0'
 
 target 'QueroSerMBDesafio' do
   # Pods for QueroSerMBDesafio
+  use_frameworks!
   pod 'Alamofire'
   pod 'Kingfisher'
-  pod 'NVActivityIndicatorView'
   pod 'R.swift'
   pod 'SnapKit'
- 
+  pod 'SVProgressHUD'
  
   target 'QueroSerMBDesafioTests' do
     pod 'KIF'

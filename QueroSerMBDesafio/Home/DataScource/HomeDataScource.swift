@@ -51,7 +51,6 @@ final class HomeDataScource: NSObject {
     @objc private func refresh() {
         completionRefresh()
     }
-    
 }
 
 extension HomeDataScource: UITableViewDataSource {
@@ -64,6 +63,8 @@ extension HomeDataScource: UITableViewDataSource {
         let cell: AssetTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
         let viewModel = viewModels[indexPath.row]
         cell.bind(viewModel: viewModel)
+        cell.applyConfig(for: indexPath, numberOfCellsInSection: tableView.numberOfRows(inSection: indexPath.section))
+        cell.addShadow()
         return cell
     }
     

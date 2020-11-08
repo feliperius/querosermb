@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "98A98149697C80CEF8D5772791E92E66"
-               BuildableName = "libFBSnapshotTestCase.a"
+               BuildableName = "FBSnapshotTestCase.framework"
                BlueprintName = "FBSnapshotTestCase"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

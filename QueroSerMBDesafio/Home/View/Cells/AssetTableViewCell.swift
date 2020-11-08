@@ -10,7 +10,12 @@ import SnapKit
 import Kingfisher
 
 class AssetTableViewCell: UITableViewCell, Reusable {
-    private let iconImageView = UIImageView()
+    lazy var iconImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = R.image.emptyCoin()
+        return imageView
+    }()
 
     private let nameLabel: UILabel = {
         let label = UILabel()
@@ -45,7 +50,7 @@ class AssetTableViewCell: UITableViewCell, Reusable {
     }()
     
     func bind(viewModel: AssetViewModel) {
-        iconImageView.kf.setImage(with: viewModel.icon)
+        iconImageView.kf.setImage(with: viewModel.icon, placeholder: R.image.emptyCoin())
         nameLabel.text = viewModel.name
         identifierLabel.text = viewModel.asssetId
         extrasStackView.removeAllArrangedSubviews()
@@ -69,7 +74,9 @@ class AssetTableViewCell: UITableViewCell, Reusable {
     // MARK: Private functions
     
     private func setupView() {
-        accessibilityLabel = R.string.accessibility.assetCell()
+       accessibilityLabel = R.string.accessibility.assetCell()
+       stackView.addBackgroundGradiant(.white, color2: .red)
+       extrasStackView.addBackgroundGradiant(.white, color2: .red)
     }
     
     private func setupLayout() {
@@ -90,5 +97,9 @@ class AssetTableViewCell: UITableViewCell, Reusable {
             extrasStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             extrasStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
+    }
+    func useRoundedSectionCorners() {
+        selectionStyle = .none
+        self.separatorInset = UIEdgeInsets(top: 0, left: self.separatorInset.left, bottom: 0, right: 0)
     }
 }

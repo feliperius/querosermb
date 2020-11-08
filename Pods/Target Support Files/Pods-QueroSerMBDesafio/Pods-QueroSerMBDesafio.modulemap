@@ -1,4 +1,4 @@
-module Pods_QueroSerMBDesafio {
+framework module Pods_QueroSerMBDesafio {
   umbrella header "Pods-QueroSerMBDesafio-umbrella.h"
 
   export *

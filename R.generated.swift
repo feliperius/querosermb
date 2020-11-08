@@ -122,6 +122,30 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
+  /// This `R.image` struct is generated, and contains static references to 2 images.
+  struct image {
+    /// Image `emptyCoin`.
+    static let emptyCoin = Rswift.ImageResource(bundle: R.hostingBundle, name: "emptyCoin")
+    /// Image `ic_wallet`.
+    static let ic_wallet = Rswift.ImageResource(bundle: R.hostingBundle, name: "ic_wallet")
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "emptyCoin", bundle: ..., traitCollection: ...)`
+    static func emptyCoin(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.emptyCoin, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "ic_wallet", bundle: ..., traitCollection: ...)`
+    static func ic_wallet(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.ic_wallet, compatibleWith: traitCollection)
+    }
+    #endif
+
+    fileprivate init() {}
+  }
+
   /// This `R.string` struct is generated, and contains static references to 2 localization tables.
   struct string {
     /// This `R.string.accessibility` struct is generated, and contains static references to 4 localization keys.
@@ -190,7 +214,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
 
-    /// This `R.string.app` struct is generated, and contains static references to 6 localization keys.
+    /// This `R.string.app` struct is generated, and contains static references to 16 localization keys.
     struct app {
       /// en translation: An unexpected error has occurred.
       ///
@@ -200,6 +224,30 @@ struct R: Rswift.Validatable {
       ///
       /// Locales: en, pt-BR
       static let mapping = Rswift.StringResource(key: "mapping", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
+      /// en translation: First negotiation
+      ///
+      /// Locales: en, pt-BR
+      static let firstNegotiation = Rswift.StringResource(key: "firstNegotiation", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
+      /// en translation: First purchase order
+      ///
+      /// Locales: en, pt-BR
+      static let firstPurchaseOrder = Rswift.StringResource(key: "firstPurchaseOrder", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
+      /// en translation: First quotation
+      ///
+      /// Locales: en, pt-BR
+      static let firstQuotation = Rswift.StringResource(key: "firstQuotation", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
+      /// en translation: Last negotiation
+      ///
+      /// Locales: en, pt-BR
+      static let lastNegotiation = Rswift.StringResource(key: "lastNegotiation", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
+      /// en translation: Last purchase order
+      ///
+      /// Locales: en, pt-BR
+      static let lastPurchaseOrder = Rswift.StringResource(key: "lastPurchaseOrder", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
+      /// en translation: Last quotation
+      ///
+      /// Locales: en, pt-BR
+      static let lastQuotation = Rswift.StringResource(key: "lastQuotation", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
       /// en translation: Overview
       ///
       /// Locales: en, pt-BR
@@ -208,6 +256,22 @@ struct R: Rswift.Validatable {
       ///
       /// Locales: en
       static let apiNotAvailable = Rswift.StringResource(key: "apiNotAvailable", tableName: "App", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Sum of an Hour
+      ///
+      /// Locales: en, pt-BR
+      static let sumAnHour = Rswift.StringResource(key: "sumAnHour", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
+      /// en translation: Sum of an day
+      ///
+      /// Locales: en, pt-BR
+      static let sumAnday = Rswift.StringResource(key: "SumAnday", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
+      /// en translation: Summation one month
+      ///
+      /// Locales: en, pt-BR
+      static let sumMonth = Rswift.StringResource(key: "SumMonth", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
+      /// en translation: Total symbols
+      ///
+      /// Locales: en, pt-BR
+      static let totalSymbols = Rswift.StringResource(key: "totalSymbols", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
       /// en translation: You are currently offline.
       ///
       /// Locales: en, pt-BR
@@ -247,6 +311,96 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("mapping", tableName: "App", bundle: bundle, comment: "")
       }
 
+      /// en translation: First negotiation
+      ///
+      /// Locales: en, pt-BR
+      static func firstNegotiation(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("firstNegotiation", tableName: "App", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "App", preferredLanguages: preferredLanguages) else {
+          return "firstNegotiation"
+        }
+
+        return NSLocalizedString("firstNegotiation", tableName: "App", bundle: bundle, comment: "")
+      }
+
+      /// en translation: First purchase order
+      ///
+      /// Locales: en, pt-BR
+      static func firstPurchaseOrder(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("firstPurchaseOrder", tableName: "App", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "App", preferredLanguages: preferredLanguages) else {
+          return "firstPurchaseOrder"
+        }
+
+        return NSLocalizedString("firstPurchaseOrder", tableName: "App", bundle: bundle, comment: "")
+      }
+
+      /// en translation: First quotation
+      ///
+      /// Locales: en, pt-BR
+      static func firstQuotation(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("firstQuotation", tableName: "App", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "App", preferredLanguages: preferredLanguages) else {
+          return "firstQuotation"
+        }
+
+        return NSLocalizedString("firstQuotation", tableName: "App", bundle: bundle, comment: "")
+      }
+
+      /// en translation: Last negotiation
+      ///
+      /// Locales: en, pt-BR
+      static func lastNegotiation(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("lastNegotiation", tableName: "App", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "App", preferredLanguages: preferredLanguages) else {
+          return "lastNegotiation"
+        }
+
+        return NSLocalizedString("lastNegotiation", tableName: "App", bundle: bundle, comment: "")
+      }
+
+      /// en translation: Last purchase order
+      ///
+      /// Locales: en, pt-BR
+      static func lastPurchaseOrder(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("lastPurchaseOrder", tableName: "App", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "App", preferredLanguages: preferredLanguages) else {
+          return "lastPurchaseOrder"
+        }
+
+        return NSLocalizedString("lastPurchaseOrder", tableName: "App", bundle: bundle, comment: "")
+      }
+
+      /// en translation: Last quotation
+      ///
+      /// Locales: en, pt-BR
+      static func lastQuotation(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("lastQuotation", tableName: "App", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "App", preferredLanguages: preferredLanguages) else {
+          return "lastQuotation"
+        }
+
+        return NSLocalizedString("lastQuotation", tableName: "App", bundle: bundle, comment: "")
+      }
+
       /// en translation: Overview
       ///
       /// Locales: en, pt-BR
@@ -275,6 +429,66 @@ struct R: Rswift.Validatable {
         }
 
         return NSLocalizedString("apiNotAvailable", tableName: "App", bundle: bundle, comment: "")
+      }
+
+      /// en translation: Sum of an Hour
+      ///
+      /// Locales: en, pt-BR
+      static func sumAnHour(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("sumAnHour", tableName: "App", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "App", preferredLanguages: preferredLanguages) else {
+          return "sumAnHour"
+        }
+
+        return NSLocalizedString("sumAnHour", tableName: "App", bundle: bundle, comment: "")
+      }
+
+      /// en translation: Sum of an day
+      ///
+      /// Locales: en, pt-BR
+      static func sumAnday(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("SumAnday", tableName: "App", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "App", preferredLanguages: preferredLanguages) else {
+          return "SumAnday"
+        }
+
+        return NSLocalizedString("SumAnday", tableName: "App", bundle: bundle, comment: "")
+      }
+
+      /// en translation: Summation one month
+      ///
+      /// Locales: en, pt-BR
+      static func sumMonth(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("SumMonth", tableName: "App", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "App", preferredLanguages: preferredLanguages) else {
+          return "SumMonth"
+        }
+
+        return NSLocalizedString("SumMonth", tableName: "App", bundle: bundle, comment: "")
+      }
+
+      /// en translation: Total symbols
+      ///
+      /// Locales: en, pt-BR
+      static func totalSymbols(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("totalSymbols", tableName: "App", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "App", preferredLanguages: preferredLanguages) else {
+          return "totalSymbols"
+        }
+
+        return NSLocalizedString("totalSymbols", tableName: "App", bundle: bundle, comment: "")
       }
 
       /// en translation: You are currently offline.

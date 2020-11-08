@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "411CAEB7B6FE73F61BEDA037CB93E566"
-               BuildableName = "libKIF.a"
+               BuildableName = "KIF.framework"
                BlueprintName = "KIF"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

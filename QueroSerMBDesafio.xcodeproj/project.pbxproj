@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C03D94B6C4B36FD062772520 /* libPods-QueroSerMBDesafio-QueroSerMBDesafioTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 172B52A8710AF29BCFC6EF74 /* libPods-QueroSerMBDesafio-QueroSerMBDesafioTests.a */; };
-		F5DCCE79A4E93C032E1ED73B /* libPods-QueroSerMBDesafio-QueroSerMBDesafioUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA1A38DFFC1534BD5DDE875 /* libPods-QueroSerMBDesafio-QueroSerMBDesafioUITests.a */; };
+		005EF37FE73DDC0126F072FC /* Pods_QueroSerMBDesafio_QueroSerMBDesafioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58073D97255E66A524605A70 /* Pods_QueroSerMBDesafio_QueroSerMBDesafioTests.framework */; };
+		476BE3F2456ADBE2CEAA8780 /* Pods_QueroSerMBDesafio_QueroSerMBDesafioUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F93D35F6777706912C6C93C /* Pods_QueroSerMBDesafio_QueroSerMBDesafioUITests.framework */; };
+		D052FE7800820CC244A264CA /* Pods_QueroSerMBDesafio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BC205805B88301ABD457EB9 /* Pods_QueroSerMBDesafio.framework */; };
+		FF0E8F592557191A000F27A9 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0E8F582557191A000F27A9 /* String+Date.swift */; };
+		FF0E8F5E25571C19000F27A9 /* AssetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0E8F5D25571C19000F27A9 /* AssetDetailViewController.swift */; };
 		FF2A523C25546A350095EA87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2A523B25546A350095EA87 /* AppDelegate.swift */; };
 		FF2A524525546A370095EA87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF2A524425546A370095EA87 /* Assets.xcassets */; };
 		FF2A524825546A370095EA87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF2A524625546A370095EA87 /* LaunchScreen.storyboard */; };
@@ -33,7 +36,6 @@
 		FF53BFC42554E27E001B62D7 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53BFC32554E27E001B62D7 /* Asset.swift */; };
 		FF53BFC92554E295001B62D7 /* AssetIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53BFC82554E295001B62D7 /* AssetIcon.swift */; };
 		FF53BFCE2554EA59001B62D7 /* AssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53BFCD2554EA59001B62D7 /* AssetViewModel.swift */; };
-		FFC9293B2555D17D00B6248C /* libPods-QueroSerMBDesafio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFC9293A2555D17D00B6248C /* libPods-QueroSerMBDesafio.a */; };
 		FFC9295B2555E26100B6248C /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC9295A2555E26100B6248C /* ErrorResult.swift */; };
 		FFC929832555EC3F00B6248C /* CompletionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC929822555EC3F00B6248C /* CompletionHandler.swift */; };
 		FFC929882555EEF900B6248C /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC929872555EEF900B6248C /* RequestManager.swift */; };
@@ -51,7 +53,8 @@
 		FFC92A852556176100B6248C /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC92A842556176100B6248C /* HomePresenter.swift */; };
 		FFC92A8A255618F700B6248C /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC92A89255618F700B6248C /* HomeInteractor.swift */; };
 		FFC92ABD2556352F00B6248C /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC92ABC2556352F00B6248C /* Dynamic.swift */; };
-		FFC92AE32556427C00B6248C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC92AE22556427C00B6248C /* R.generated.swift */; };
+		FFC92AF12557185D00B6248C /* DolarFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC92AF02557185D00B6248C /* DolarFormatter.swift */; };
+		FFD60D7425573F9A006AF46F /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD60D7325573F9A006AF46F /* R.generated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,15 +75,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		172B52A8710AF29BCFC6EF74 /* libPods-QueroSerMBDesafio-QueroSerMBDesafioTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QueroSerMBDesafio-QueroSerMBDesafioTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		31778CE3EC7A38F635C93E15 /* Pods-QueroSerMBDesafio-QueroSerMBDesafioTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QueroSerMBDesafio-QueroSerMBDesafioTests.release.xcconfig"; path = "Target Support Files/Pods-QueroSerMBDesafio-QueroSerMBDesafioTests/Pods-QueroSerMBDesafio-QueroSerMBDesafioTests.release.xcconfig"; sourceTree = "<group>"; };
+		58073D97255E66A524605A70 /* Pods_QueroSerMBDesafio_QueroSerMBDesafioTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QueroSerMBDesafio_QueroSerMBDesafioTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		585CE71958065E6AA9DA8EE2 /* Pods-QueroSerMBDesafio-QueroSerMBDesafioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QueroSerMBDesafio-QueroSerMBDesafioTests.debug.xcconfig"; path = "Target Support Files/Pods-QueroSerMBDesafio-QueroSerMBDesafioTests/Pods-QueroSerMBDesafio-QueroSerMBDesafioTests.debug.xcconfig"; sourceTree = "<group>"; };
 		73DF8409BB0E0E85DF2581BD /* Pods-QueroSerMBDesafio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QueroSerMBDesafio.debug.xcconfig"; path = "Target Support Files/Pods-QueroSerMBDesafio/Pods-QueroSerMBDesafio.debug.xcconfig"; sourceTree = "<group>"; };
 		7D922091F129163682C787C3 /* Pods-QueroSerMBDesafio-QueroSerMBDesafioUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QueroSerMBDesafio-QueroSerMBDesafioUITests.debug.xcconfig"; path = "Target Support Files/Pods-QueroSerMBDesafio-QueroSerMBDesafioUITests/Pods-QueroSerMBDesafio-QueroSerMBDesafioUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		8CA1A38DFFC1534BD5DDE875 /* libPods-QueroSerMBDesafio-QueroSerMBDesafioUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QueroSerMBDesafio-QueroSerMBDesafioUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F93D35F6777706912C6C93C /* Pods_QueroSerMBDesafio_QueroSerMBDesafioUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QueroSerMBDesafio_QueroSerMBDesafioUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BC205805B88301ABD457EB9 /* Pods_QueroSerMBDesafio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QueroSerMBDesafio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA45DE9C64887728182AEEA6 /* Pods-QueroSerMBDesafio-QueroSerMBDesafioUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QueroSerMBDesafio-QueroSerMBDesafioUITests.release.xcconfig"; path = "Target Support Files/Pods-QueroSerMBDesafio-QueroSerMBDesafioUITests/Pods-QueroSerMBDesafio-QueroSerMBDesafioUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B02CC150759F0AC2D6C5E03B /* Pods-QueroSerMBDesafio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QueroSerMBDesafio.release.xcconfig"; path = "Target Support Files/Pods-QueroSerMBDesafio/Pods-QueroSerMBDesafio.release.xcconfig"; sourceTree = "<group>"; };
 		F7BCE55E43B1565A78F54636 /* libPods-QueroSerMBDesafio.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QueroSerMBDesafio.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF0E8F582557191A000F27A9 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
+		FF0E8F5D25571C19000F27A9 /* AssetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailViewController.swift; sourceTree = "<group>"; };
 		FF2A523825546A350095EA87 /* QueroSerMBDesafio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QueroSerMBDesafio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF2A523B25546A350095EA87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF2A524425546A370095EA87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -111,9 +117,7 @@
 		FF53BFC32554E27E001B62D7 /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		FF53BFC82554E295001B62D7 /* AssetIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetIcon.swift; sourceTree = "<group>"; };
 		FF53BFCD2554EA59001B62D7 /* AssetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetViewModel.swift; sourceTree = "<group>"; };
-		FFC929302555D05100B6248C /* libPods-QueroSerMBDesafio.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-QueroSerMBDesafio.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC929322555D16E00B6248C /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
-		FFC9293A2555D17D00B6248C /* libPods-QueroSerMBDesafio.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-QueroSerMBDesafio.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC9295A2555E26100B6248C /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		FFC929822555EC3F00B6248C /* CompletionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionHandler.swift; sourceTree = "<group>"; };
 		FFC929872555EEF900B6248C /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
@@ -132,7 +136,8 @@
 		FFC92A842556176100B6248C /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		FFC92A89255618F700B6248C /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		FFC92ABC2556352F00B6248C /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
-		FFC92AE22556427C00B6248C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		FFC92AF02557185D00B6248C /* DolarFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DolarFormatter.swift; sourceTree = "<group>"; };
+		FFD60D7325573F9A006AF46F /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFC9293B2555D17D00B6248C /* libPods-QueroSerMBDesafio.a in Frameworks */,
+				D052FE7800820CC244A264CA /* Pods_QueroSerMBDesafio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,7 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C03D94B6C4B36FD062772520 /* libPods-QueroSerMBDesafio-QueroSerMBDesafioTests.a in Frameworks */,
+				005EF37FE73DDC0126F072FC /* Pods_QueroSerMBDesafio_QueroSerMBDesafioTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,7 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5DCCE79A4E93C032E1ED73B /* libPods-QueroSerMBDesafio-QueroSerMBDesafioUITests.a in Frameworks */,
+				476BE3F2456ADBE2CEAA8780 /* Pods_QueroSerMBDesafio_QueroSerMBDesafioUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,12 +171,11 @@
 		76AC503C81828917C5F2B89A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FFC9293A2555D17D00B6248C /* libPods-QueroSerMBDesafio.a */,
 				FFC929322555D16E00B6248C /* Pods */,
-				FFC929302555D05100B6248C /* libPods-QueroSerMBDesafio.a */,
 				F7BCE55E43B1565A78F54636 /* libPods-QueroSerMBDesafio.a */,
-				172B52A8710AF29BCFC6EF74 /* libPods-QueroSerMBDesafio-QueroSerMBDesafioTests.a */,
-				8CA1A38DFFC1534BD5DDE875 /* libPods-QueroSerMBDesafio-QueroSerMBDesafioUITests.a */,
+				9BC205805B88301ABD457EB9 /* Pods_QueroSerMBDesafio.framework */,
+				58073D97255E66A524605A70 /* Pods_QueroSerMBDesafio_QueroSerMBDesafioTests.framework */,
+				8F93D35F6777706912C6C93C /* Pods_QueroSerMBDesafio_QueroSerMBDesafioUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -214,6 +218,7 @@
 		FF2A523A25546A350095EA87 /* QueroSerMBDesafio */ = {
 			isa = PBXGroup;
 			children = (
+				FFC92AEF2557182500B6248C /* Helpers */,
 				FF2A53242554C9210095EA87 /* BaseClasses */,
 				FF2A5314255493980095EA87 /* Coordinator */,
 				FF2A5311255491FD0095EA87 /* AssetDetail */,
@@ -223,7 +228,7 @@
 				FF2A52C525547E2D0095EA87 /* Service */,
 				FF2A5287255470F50095EA87 /* Rescources */,
 				FF2A524925546A370095EA87 /* Info.plist */,
-				FFC92AE22556427C00B6248C /* R.generated.swift */,
+				FFD60D7325573F9A006AF46F /* R.generated.swift */,
 				FF2A523B25546A350095EA87 /* AppDelegate.swift */,
 			);
 			path = QueroSerMBDesafio;
@@ -353,6 +358,7 @@
 		FF2A5311255491FD0095EA87 /* AssetDetail */ = {
 			isa = PBXGroup;
 			children = (
+				FF0E8F5D25571C19000F27A9 /* AssetDetailViewController.swift */,
 			);
 			path = AssetDetail;
 			sourceTree = "<group>";
@@ -469,6 +475,15 @@
 			path = DataScource;
 			sourceTree = "<group>";
 		};
+		FFC92AEF2557182500B6248C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FFC92AF02557185D00B6248C /* DolarFormatter.swift */,
+				FF0E8F582557191A000F27A9 /* String+Date.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -481,6 +496,7 @@
 				FF2A523525546A350095EA87 /* Frameworks */,
 				FF2A523625546A350095EA87 /* Resources */,
 				FFC9291A2555CEBD00B6248C /* R.swift */,
+				DB0F5E4A9622DF613A016A0E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -499,6 +515,7 @@
 				FF2A524A25546A370095EA87 /* Sources */,
 				FF2A524B25546A370095EA87 /* Frameworks */,
 				FF2A524C25546A370095EA87 /* Resources */,
+				36575BAB778B31C4881BC045 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -518,6 +535,7 @@
 				FF2A525525546A380095EA87 /* Sources */,
 				FF2A525625546A380095EA87 /* Frameworks */,
 				FF2A525725546A380095EA87 /* Resources */,
+				9BA13B9CE45F90295E577276 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -602,6 +620,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		36575BAB778B31C4881BC045 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QueroSerMBDesafio-QueroSerMBDesafioTests/Pods-QueroSerMBDesafio-QueroSerMBDesafioTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QueroSerMBDesafio-QueroSerMBDesafioTests/Pods-QueroSerMBDesafio-QueroSerMBDesafioTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QueroSerMBDesafio-QueroSerMBDesafioTests/Pods-QueroSerMBDesafio-QueroSerMBDesafioTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		717C58E5ED339E48C2C336BD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -622,6 +657,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9BA13B9CE45F90295E577276 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QueroSerMBDesafio-QueroSerMBDesafioUITests/Pods-QueroSerMBDesafio-QueroSerMBDesafioUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QueroSerMBDesafio-QueroSerMBDesafioUITests/Pods-QueroSerMBDesafio-QueroSerMBDesafioUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QueroSerMBDesafio-QueroSerMBDesafioUITests/Pods-QueroSerMBDesafio-QueroSerMBDesafioUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AA9DAD84E607638FC2FA8393 /* [CP] Check Pods Manifest.lock */ = {
@@ -668,6 +720,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		DB0F5E4A9622DF613A016A0E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QueroSerMBDesafio/Pods-QueroSerMBDesafio-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QueroSerMBDesafio/Pods-QueroSerMBDesafio-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QueroSerMBDesafio/Pods-QueroSerMBDesafio-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FFC9291A2555CEBD00B6248C /* R.swift */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
@@ -706,9 +775,9 @@
 				FF2A53372554CB290095EA87 /* BaseCoordinator.swift in Sources */,
 				FF2A53262554C9440095EA87 /* BaseViewController.swift in Sources */,
 				FFC92A062556026400B6248C /* AssetService.swift in Sources */,
-				FFC92AE32556427C00B6248C /* R.generated.swift in Sources */,
 				FFC92A852556176100B6248C /* HomePresenter.swift in Sources */,
 				FFC929882555EEF900B6248C /* RequestManager.swift in Sources */,
+				FF0E8F592557191A000F27A9 /* String+Date.swift in Sources */,
 				FFC92A8A255618F700B6248C /* HomeInteractor.swift in Sources */,
 				FF53BFBC2554E22D001B62D7 /* HomeDelegate.swift in Sources */,
 				FFC929922555F4EB00B6248C /* NetworkError.swift in Sources */,
@@ -723,9 +792,12 @@
 				FF2A532F2554C9E30095EA87 /* MBCoordinatorProtocol.swift in Sources */,
 				FFC92A0B255602C000B6248C /* ApiConstants.swift in Sources */,
 				FFC9295B2555E26100B6248C /* ErrorResult.swift in Sources */,
+				FF0E8F5E25571C19000F27A9 /* AssetDetailViewController.swift in Sources */,
 				FF2A52CE255481E90095EA87 /* MBNavigationController.swift in Sources */,
 				FF2A52FB255489FE0095EA87 /* UITableView+Reusable.swift in Sources */,
 				FF2A52C725547F7C0095EA87 /* ApplicationCoordinator.swift in Sources */,
+				FFD60D7425573F9A006AF46F /* R.generated.swift in Sources */,
+				FFC92AF12557185D00B6248C /* DolarFormatter.swift in Sources */,
 				FFC92A7C2556168F00B6248C /* HomeDataScource.swift in Sources */,
 				FFC92A2825560E4A00B6248C /* UIStackView+RemoveAllArranged.swift in Sources */,
 				FFC92A2025560D6F00B6248C /* AssetTableViewCell.swift in Sources */,
@@ -954,7 +1026,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 585CE71958065E6AA9DA8EE2 /* Pods-QueroSerMBDesafio-QueroSerMBDesafioTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = QueroSerMBDesafioTests/Info.plist;
@@ -976,7 +1048,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 31778CE3EC7A38F635C93E15 /* Pods-QueroSerMBDesafio-QueroSerMBDesafioTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = QueroSerMBDesafioTests/Info.plist;
@@ -998,7 +1070,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7D922091F129163682C787C3 /* Pods-QueroSerMBDesafio-QueroSerMBDesafioUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = QueroSerMBDesafioUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1018,7 +1090,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AA45DE9C64887728182AEEA6 /* Pods-QueroSerMBDesafio-QueroSerMBDesafioUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = QueroSerMBDesafioUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

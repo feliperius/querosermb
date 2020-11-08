@@ -12,11 +12,26 @@ struct AssetViewModel {
     let name: String
     let asssetId: String
     var extras: [(String, String)] = []
-    var allExtras: [(String, String)] = []
+    var allTitles: [(String, String)] = []
     
     init(entity: Asset) {
         name = entity.name
         asssetId = entity.assetId
+        
+        let lastTrade = (R.string.app.lastNegotiation(), "\(entity.dataTradeEnd.date())")
+        let totalSymbols = (R.string.app.totalSymbols(), "\(entity.dataSymbolsCount)")
+        let volume1Hr = (R.string.app.sumAnHour(), "\(entity.volume1HrsUsd)".dolar())
+        
+        extras.append(contentsOf: [lastTrade, totalSymbols, volume1Hr])
+
+        allTitles.append((R.string.app.firstQuotation(), "\(entity.dataQuoteStart.date())"))
+        allTitles.append((R.string.app.lastQuotation(), "\(entity.dataQuoteEnd.date())"))
+        allTitles.append((R.string.app.firstNegotiation(), "\(entity.dataOrderbookStart.date())"))
+        allTitles.append((R.string.app.lastPurchaseOrder(), "\(entity.dataOrderbookEnd.date())"))
+        allTitles.append((R.string.app.firstNegotiation(), "\(entity.dataTradeStart.date())"))
+        allTitles.append(contentsOf: [lastTrade, totalSymbols, volume1Hr])
+        allTitles.append((R.string.app.sumAnday(), "\(entity.volume1DayUsd)".dolar()))
+        allTitles.append((R.string.app.sumMonth(), "\(entity.volume1MthUsd)".dolar()))
     }
     
     init(entity: AssetIcon?, viewModel: AssetViewModel) {
@@ -24,7 +39,7 @@ struct AssetViewModel {
         name = viewModel.name
         asssetId = viewModel.asssetId
         extras = viewModel.extras
-        allExtras = viewModel.allExtras
+        allTitles = viewModel.allTitles
     }
     
 }

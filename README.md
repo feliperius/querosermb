@@ -1,3 +1,25 @@
+# **DESAFIO Quero Ser MB - Felipe Perius**
+
+Objetivo do projeto é testar os conhecimentos do canditado sobre a estrutura MVVM e consumo assíncrono de APIs e habilidades para construção de aplicativos para plataforma iOS .
+
+## Começando
+Estas instruções irão levá-lo a uma cópia do projeto em funcionamento em sua máquina local para fins de desenvolvimento e teste.
+
+### Pré-requisitos
+O que você precisa para construir, executar e testar o aplicativo:
+Xcode 11.0 ou posterior. 
+O Deployment target está configurando pra suporta iOS 11.0 ou posterior.
+
+Faça o clone do repositório em sua máquina local.
+
+ Depois será necessario a instalação das dependências com o comando:
+```bash
+$ pod install
+```
+
+Em seguida, abra o projeto no Xcode:
+open QueroSerMBDesafio.xcworkspace Agora você está pronto para começar.
+
 # Quero ser MB
 
 ### **O MB**

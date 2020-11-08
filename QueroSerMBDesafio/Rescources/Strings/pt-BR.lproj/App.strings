@@ -12,3 +12,14 @@
 "mapping" = "Ocorreu um erro inesperado ao se comunicar com o servidor.";
 "offline" = "Você está offline no momento.";
 "other" = "Ocorreu um erro inesperado.";
+//CELL
+"lastNegotiation" = "Última negociação";
+"totalSymbols" = "Total de símbolos";
+"sumAnHour" = "Somatorio de uma Hora";
+"firstQuotation" = "Primeira cotação";
+"lastQuotation" = "Última cotação";
+"firstPurchaseOrder" = "Primeira ordem de compra";
+"lastPurchaseOrder" = "Última ordem de compra";
+"firstNegotiation" = "Primeira negociação";
+"SumAnday" = "Somatorio um dia";
+"SumMonth" = "Somatorio um mês";
