@@ -22,6 +22,7 @@ final class ApplicationCoordinator: Coordinator {
         self.window = window
         assetService = service
         rootNavigationViewController = MBNavigationController()
+        rootNavigationViewController.configMenuButton()
         window.rootViewController = rootNavigationViewController
     }
     

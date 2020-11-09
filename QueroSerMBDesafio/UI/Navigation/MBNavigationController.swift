@@ -14,6 +14,7 @@ class MBNavigationController: UINavigationController {
     required init() {
         super.init(nibName: nil, bundle: nil)
         configStyle()
+        configMenuButton()
     }
     override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
@@ -26,11 +27,11 @@ class MBNavigationController: UINavigationController {
     
     func configStyle() {
          navigationBar.barStyle = .default
-         navigationBar.tintColor = ColorTheme.navBarTint
+         navigationBar.tintColor = .white
          navigationBar.barTintColor = ColorTheme.navBarTint
          navigationBar.backgroundColor = ColorTheme.navBarTint
+         navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
          navigationBar.isTranslucent = false
-         navigationBar.shadowImage = UIImage()
      }
      
 
@@ -44,6 +45,17 @@ class MBNavigationController: UINavigationController {
          let barButton = UIBarButtonItem(customView: button)
          navigationItem.leftBarButtonItem = barButton
      }
+    
+    func configMenuButton() {
+        let button = UIButton(type: .custom)
+        button.setImage(R.image.ic_menu()?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.tintColor = ColorTheme.primary
+        button.addTarget(self, action: #selector(back), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.applyNavBarConstraints(size: (width: 25, height: 30))
+        let barButton = UIBarButtonItem(customView: button)
+        navigationItem.rightBarButtonItem = barButton
+    }
 
      override func viewDidLoad() {
          super.viewDidLoad()

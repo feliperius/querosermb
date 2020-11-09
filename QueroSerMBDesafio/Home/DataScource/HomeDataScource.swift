@@ -19,7 +19,7 @@ final class HomeDataScource: NSObject {
         }
     }
     
-    private let refreshControl = UIRefreshControl()
+    var refreshControl = UIRefreshControl()
     private weak var tableView: UITableView?
     private let completion: CompletionHandler
     private let completionRefresh: CompletionHandlerRefresh
@@ -36,6 +36,7 @@ final class HomeDataScource: NSObject {
     
     private func registerCells() {
         tableView?.registerReusableCell(AssetTableViewCell.self)
+        tableView?.registerReusableCell(HeaderTableViewCell.self)
     }
     
     private func setupDataSource() {
@@ -45,6 +46,7 @@ final class HomeDataScource: NSObject {
     
     private func setupPullToRefresh() {
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        refreshControl.tintColor = ColorTheme.primary
         tableView?.refreshControl = refreshControl
     }
     
@@ -56,31 +58,38 @@ final class HomeDataScource: NSObject {
 extension HomeDataScource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModels.count
+        return viewModels.count+1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: AssetTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
-        let viewModel = viewModels[indexPath.row]
-        cell.bind(viewModel: viewModel)
-        cell.applyConfig(for: indexPath, numberOfCellsInSection: tableView.numberOfRows(inSection: indexPath.section))
-        cell.addShadow()
-        return cell
+      
+        if (indexPath.row == 0) {
+            let cellHeader: HeaderTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
+            return cellHeader
+        } else {
+            let cell: AssetTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
+            let viewModel = viewModels[indexPath.row-1]
+            cell.bind(viewModel: viewModel)
+            cell.applyConfig(for: indexPath, numberOfCellsInSection: tableView.numberOfRows(inSection: indexPath.section))
+            return cell
+        }
     }
-    
 }
 
 extension HomeDataScource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        if (indexPath.row == 0) {
+            return 150
+        } else {
+            return UITableView.automaticDimension
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        completion(viewModels[indexPath.row])
+        completion(viewModels[indexPath.row-1])
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
 }

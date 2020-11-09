@@ -122,10 +122,22 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 2 images.
+  /// This `R.image` struct is generated, and contains static references to 8 images.
   struct image {
     /// Image `emptyCoin`.
     static let emptyCoin = Rswift.ImageResource(bundle: R.hostingBundle, name: "emptyCoin")
+    /// Image `ic_back`.
+    static let ic_back = Rswift.ImageResource(bundle: R.hostingBundle, name: "ic_back")
+    /// Image `ic_close`.
+    static let ic_close = Rswift.ImageResource(bundle: R.hostingBundle, name: "ic_close")
+    /// Image `ic_filter`.
+    static let ic_filter = Rswift.ImageResource(bundle: R.hostingBundle, name: "ic_filter")
+    /// Image `ic_menuHome`.
+    static let ic_menuHome = Rswift.ImageResource(bundle: R.hostingBundle, name: "ic_menuHome")
+    /// Image `ic_menu`.
+    static let ic_menu = Rswift.ImageResource(bundle: R.hostingBundle, name: "ic_menu")
+    /// Image `ic_more`.
+    static let ic_more = Rswift.ImageResource(bundle: R.hostingBundle, name: "ic_more")
     /// Image `ic_wallet`.
     static let ic_wallet = Rswift.ImageResource(bundle: R.hostingBundle, name: "ic_wallet")
 
@@ -133,6 +145,48 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "emptyCoin", bundle: ..., traitCollection: ...)`
     static func emptyCoin(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.emptyCoin, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "ic_back", bundle: ..., traitCollection: ...)`
+    static func ic_back(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.ic_back, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "ic_close", bundle: ..., traitCollection: ...)`
+    static func ic_close(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.ic_close, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "ic_filter", bundle: ..., traitCollection: ...)`
+    static func ic_filter(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.ic_filter, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "ic_menu", bundle: ..., traitCollection: ...)`
+    static func ic_menu(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.ic_menu, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "ic_menuHome", bundle: ..., traitCollection: ...)`
+    static func ic_menuHome(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.ic_menuHome, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "ic_more", bundle: ..., traitCollection: ...)`
+    static func ic_more(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.ic_more, compatibleWith: traitCollection)
     }
     #endif
 
@@ -214,7 +268,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
 
-    /// This `R.string.app` struct is generated, and contains static references to 16 localization keys.
+    /// This `R.string.app` struct is generated, and contains static references to 20 localization keys.
     struct app {
       /// en translation: An unexpected error has occurred.
       ///
@@ -272,14 +326,30 @@ struct R: Rswift.Validatable {
       ///
       /// Locales: en, pt-BR
       static let totalSymbols = Rswift.StringResource(key: "totalSymbols", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
+      /// en translation: Transfer coins from other platforms   to your bitcoin market wallet or   access the site and make a deposit.
+      ///
+      /// Locales: en, pt-BR
+      static let messageHomeHeader = Rswift.StringResource(key: "messageHomeHeader", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
       /// en translation: You are currently offline.
       ///
       /// Locales: en, pt-BR
       static let offline = Rswift.StringResource(key: "offline", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
+      /// en translation: You have no balance
+      ///
+      /// Locales: en, pt-BR
+      static let titleHomeHeader = Rswift.StringResource(key: "titleHomeHeader", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
       /// en translation: erro
       ///
       /// Locales: en, pt-BR
       static let error = Rswift.StringResource(key: "error", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
+      /// en translation: price: 
+      ///
+      /// Locales: en, pt-BR
+      static let price = Rswift.StringResource(key: "price", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
+      /// en translation: show details
+      ///
+      /// Locales: en, pt-BR
+      static let showDetails = Rswift.StringResource(key: "showDetails", tableName: "App", bundle: R.hostingBundle, locales: ["en", "pt-BR"], comment: nil)
 
       /// en translation: An unexpected error has occurred.
       ///
@@ -491,6 +561,21 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("totalSymbols", tableName: "App", bundle: bundle, comment: "")
       }
 
+      /// en translation: Transfer coins from other platforms   to your bitcoin market wallet or   access the site and make a deposit.
+      ///
+      /// Locales: en, pt-BR
+      static func messageHomeHeader(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("messageHomeHeader", tableName: "App", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "App", preferredLanguages: preferredLanguages) else {
+          return "messageHomeHeader"
+        }
+
+        return NSLocalizedString("messageHomeHeader", tableName: "App", bundle: bundle, comment: "")
+      }
+
       /// en translation: You are currently offline.
       ///
       /// Locales: en, pt-BR
@@ -506,6 +591,21 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("offline", tableName: "App", bundle: bundle, comment: "")
       }
 
+      /// en translation: You have no balance
+      ///
+      /// Locales: en, pt-BR
+      static func titleHomeHeader(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("titleHomeHeader", tableName: "App", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "App", preferredLanguages: preferredLanguages) else {
+          return "titleHomeHeader"
+        }
+
+        return NSLocalizedString("titleHomeHeader", tableName: "App", bundle: bundle, comment: "")
+      }
+
       /// en translation: erro
       ///
       /// Locales: en, pt-BR
@@ -519,6 +619,36 @@ struct R: Rswift.Validatable {
         }
 
         return NSLocalizedString("error", tableName: "App", bundle: bundle, comment: "")
+      }
+
+      /// en translation: price: 
+      ///
+      /// Locales: en, pt-BR
+      static func price(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("price", tableName: "App", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "App", preferredLanguages: preferredLanguages) else {
+          return "price"
+        }
+
+        return NSLocalizedString("price", tableName: "App", bundle: bundle, comment: "")
+      }
+
+      /// en translation: show details
+      ///
+      /// Locales: en, pt-BR
+      static func showDetails(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("showDetails", tableName: "App", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "App", preferredLanguages: preferredLanguages) else {
+          return "showDetails"
+        }
+
+        return NSLocalizedString("showDetails", tableName: "App", bundle: bundle, comment: "")
       }
 
       fileprivate init() {}

@@ -17,7 +17,7 @@ final class AssetService {
 extension AssetService: ApiClient {
     func assets(onSuccess: @escaping ([Asset]) -> (), onError: @escaping (NetworkError) -> ()) {
         getRequest.get(url: AssetEndpoints.getAssets.path) { (data, error) in
-            let result = RequestManager<Asset>().generate(data, error)
+            let result = ParseDecodable<Asset>().generate(data, error)
             switch result {
             case .success(let assets):
                 onSuccess(assets)
@@ -29,7 +29,7 @@ extension AssetService: ApiClient {
     
     func icons(onSuccess: @escaping ([AssetIcon]) -> ()) {
         getRequest.get(url: AssetEndpoints.getIcons.path)  { (data, error) in
-            let result = RequestManager<AssetIcon>().generate(data, error)
+            let result = ParseDecodable<AssetIcon>().generate(data, error)
             switch result {
             case .success(let icons):
                 onSuccess(icons)

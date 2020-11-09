@@ -20,6 +20,21 @@ $ pod install
 Em seguida, abra o projeto no Xcode:
 open QueroSerMBDesafio.xcworkspace Agora você está pronto para começar.
 
+### Uso de dependências 
+
+Nesse projeto utilizei 6 dependecias utilizando cocoaPods:
+* Utilizei o  [Alamofire](https://github.com/Alamofire/Alamofire) para facilitar as requisições com API .
+
+* [KINGFISHER](https://github.com/onevcat/Kingfisher) para donwload de imagens.
+
+* [SnapKitt](https://github.com/SnapKit/SnapKit) para fazer o layout com codeView.
+
+* [SVProgressHUD](https://github.com/SVProgressHUD/SVProgressHUD) para criar loadings e feedbacks de carregamentos. 
+
+* [R.swift](https://github.com/mac-cain13/R.swift) para organização dos Resources do projeto e facilitação para localização das strings.
+
+* [Quick/Nimble](https://github.com/Quick/Quick) para  teste unitarios/UI.
+
 # Quero ser MB
 
 ### **O MB**

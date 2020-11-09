@@ -23,4 +23,9 @@
 "firstNegotiation" = "First negotiation";
 "SumAnday" = "Sum of an day";
 "SumMonth" = "Summation one month";
+"titleHomeHeader" = "You have no balance";
+"messageHomeHeader" = "Transfer coins from other platforms \n to your bitcoin market wallet or \n access the site and make a deposit.";
+"showDetails" = "show details";
+//AssetDetail
+"price" = "price: ";
 

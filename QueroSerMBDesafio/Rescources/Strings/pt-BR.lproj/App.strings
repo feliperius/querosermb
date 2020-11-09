@@ -23,3 +23,8 @@
 "firstNegotiation" = "Primeira negociação";
 "SumAnday" = "Somatorio um dia";
 "SumMonth" = "Somatorio um mês";
+"titleHomeHeader" = "Você não possui saldo";
+"messageHomeHeader" = "Faça uma transferencia de moedas de outras plataformas para sua carteira do mercado bitcoin ou acesse o site e faça um depósito.";
+"showDetails" = "ver detalhes";
+//AssetDetail
+"price" = "preço: ";

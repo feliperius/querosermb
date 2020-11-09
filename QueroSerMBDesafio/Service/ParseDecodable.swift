@@ -6,7 +6,7 @@
 //
 import Foundation
 
-class RequestManager <T: Decodable> {
+class ParseDecodable <T: Decodable> {
     func generate(_ data: Data?, _ error: NetworkError?) -> Result<[T], NetworkError> {
         if let data = data {
             do {

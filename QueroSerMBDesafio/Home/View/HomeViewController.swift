@@ -5,11 +5,10 @@
 //  Created by Felipe Perius on 05/11/20.
 //
 import UIKit
+import SnapKit
 
-
-final class HomeViewController: BaseViewController {
+final class HomeViewController: BaseViewController,CodableView {
     private let tableView  = UITableView()
-    
     private lazy var dataSource: HomeDataScource = {
         let completion: HomeDataScource.CompletionHandler = { [weak self] in
             self?.didSelect(viewModel: $0)
@@ -47,8 +46,7 @@ final class HomeViewController: BaseViewController {
     // MARK: Life Cycle
     override func loadView() {
         super.loadView()
-        setupView()
-        setupLayout()
+        setupViews()
     }
     
     override func viewDidLoad() {
@@ -56,31 +54,39 @@ final class HomeViewController: BaseViewController {
         loadAssets()
     }
     
-    // MARK: Private functions
+    override func viewWillAppear(_ animated: Bool) {
+        configMenuButton()
+        configFilterButton()
+    }
     
-    private func setupView() {
+    // MARK: CodableView functions
+    
+    func configViews() {
         view.accessibilityLabel = R.string.accessibility.assetList()
-        view.backgroundColor = ColorTheme.backgroundMain
+        view.backgroundColor = ColorTheme.navBarTint
+        title = R.string.app.homeTitle()
+        tableView.backgroundColor = ColorTheme.backgroundMain
     }
     
-    private func setupLayout() {
-        view.addSubview(tableView, constraints: [
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+    
+    func buildViews() {
+        view.addSubview(tableView)
     }
     
+    func configConstraints() {
+        tableView.snp.makeConstraints {
+            $0.top.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    // MARK: private functions
+   
     private func loadAssets() {
         showLoading()
         interactor.loadAssets()
     }
     
     private func pullToRefresh() {
-        if self.dataSource.viewModels.isEmpty {
-            interactor.loadAssets()
-        }
+        interactor.loadAssets()
     }
     
     private func didSelect(viewModel: AssetViewModel) {
@@ -104,6 +110,7 @@ extension HomeViewController: HomePresenter {
     
     func hideLoading() {
         self.dismissLoading()
+        self.dataSource.refreshControl.endRefreshing()
     }
 }
 extension UITableViewCell {

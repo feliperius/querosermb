@@ -10,9 +10,6 @@ target 'QueroSerMBDesafio' do
   pod 'SVProgressHUD'
  
   target 'QueroSerMBDesafioTests' do
-    pod 'KIF'
-    pod 'FBSnapshotTestCase'
-    pod 'Nimble-Snapshots'
     pod 'Nimble'
     pod 'Quick'
   end

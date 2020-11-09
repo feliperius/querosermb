@@ -7,23 +7,36 @@
 
 import UIKit
 
-class AssetDetailViewController: BaseViewController {
+class AssetDetailViewController: BaseViewController,CodableView {
     private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = R.image.emptyCoin()
         return imageView
     }()
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 28)
-        
+        label.textColor = ColorTheme.primary
         return label
     }()
 
+    private lazy var priceLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 28)
+        label.textColor = ColorTheme.primary
+        return label
+    }()
+    
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [iconImageView, nameLabel])
+        let stackView = UIStackView()
         stackView.spacing = 16
-
+        return stackView
+    }()
+    
+    private lazy var priceStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 16
         return stackView
     }()
     
@@ -31,7 +44,7 @@ class AssetDetailViewController: BaseViewController {
         let stackView = UIStackView()
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
-        stackView.spacing = 16
+        stackView.spacing = 15
 
         return stackView
     }()
@@ -42,52 +55,64 @@ class AssetDetailViewController: BaseViewController {
     
     override func loadView() {
         super.loadView()
-     
-        setupView()
-        setupLayout()
+        setupViews()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         bindExchangeAdapter()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        //view.addGradientBackground(firstColor:iconImageView.image?.getPixelColor(pos: CGPoint(x: 100, y: 100)) ?? ColorTheme.backgroundMain, secondColor: .white)
+        view.backgroundColor = ColorTheme.backgroundMain
+    }
     // MARK: Private functions
-
-    private func setupView() {
+    func configViews() {
         view.accessibilityLabel = R.string.accessibility.assetDetail()
-        if #available(iOS 13.0, *) {
-            view.backgroundColor = .systemBackground
-        } else {
-            view.backgroundColor = .white
+    }
+    
+    func buildViews() {
+        view.addSubview(stackView)
+        view.addSubview(priceStackView)
+        view.addSubview(extrasStackView)
+        stackView.addArrangedSubview(iconImageView)
+        stackView.addArrangedSubview(nameLabel)
+        priceStackView.addArrangedSubview(priceLabel)
+    }
+    
+    func configConstraints() {
+        stackView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
         }
-    }
-    
-    private func setupLayout() {
-        view.addSubview(iconImageView, constraints: [
-            iconImageView.heightAnchor.constraint(equalToConstant: 70),
-            iconImageView.widthAnchor.constraint(equalToConstant: 70)
-        ])
         
-        view.addSubview(stackView, constraints: [
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
-        ])
+        priceStackView.snp.makeConstraints { make in
+            make.top.equalTo(stackView.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
         
-        view.addSubview(extrasStackView, constraints: [
-            extrasStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 32),
-            extrasStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-            extrasStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor)
-        ])
+        iconImageView.snp.makeConstraints { make in
+            make.height.width.equalTo(70)
+        }
+        
+        extrasStackView.snp.makeConstraints { make in
+            make.top.equalTo(priceStackView.snp.bottom).offset(32)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+
     }
-    
     private func bindExchangeAdapter() {
         guard let viewModel = viewModel else { return }
-        
-        iconImageView.kf.setImage(with: viewModel.icon)
+        if viewModel.icon == nil {
+            iconImageView.image = R.image.emptyCoin()
+        } else {
+            iconImageView.kf.setImage(with: viewModel.icon)
+        }
         nameLabel.text = viewModel.name
+        priceLabel.text = R.string.app.price() + viewModel.price
         viewModel.allTitles.forEach {
             extrasStackView.addArrangedSubview(AssetExtraView(title: $0.0, date: $0.1))
         }

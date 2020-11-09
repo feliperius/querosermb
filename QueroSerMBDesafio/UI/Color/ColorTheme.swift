@@ -9,6 +9,7 @@ import UIKit
 
 class ColorTheme: ColorThemeProtocol {
     static var primary: UIColor = .white
-    static var navBarTint: UIColor = .smokeGrayMB
-    static var backgroundMain: UIColor = .smokeGrayMB
+    static var navBarTint: UIColor { .smokeGrayMB }
+    static var backgroundMain: UIColor { .smokeGrayMB }
+    static var blueMB: UIColor { .blue }
 }

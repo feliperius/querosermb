@@ -10,17 +10,17 @@ import UIKit
 final class AssetExtraView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
-        label.textColor = .gray
+        label.font = .boldSystemFont(ofSize: 14)
+        label.textColor = .lightGray
         
         return label
     }()
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
+        label.font = .boldSystemFont(ofSize: 14)
         label.textAlignment = .right
-        
+        label.textColor = .lightGray
         return label
     }()
     
