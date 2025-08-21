@@ -163,7 +163,7 @@ class NetworkService {
         } else if (statusCode == 500) {
           return Exception('Internal server error');
         }
-        return Exception('Bad response: ${statusCode}');
+        return Exception('Bad response: $statusCode');
       case DioExceptionType.cancel:
         return Exception('Request cancelled');
       case DioExceptionType.connectionError:

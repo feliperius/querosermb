@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/dependency_injection.dart';
 import 'core/theme/theme.dart';
-import 'features/exchanges/presentation/pages/home_page.dart';
+import 'features/list_exchanges/presentation/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());

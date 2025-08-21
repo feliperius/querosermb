@@ -7,6 +7,8 @@ class ApiUrls {
   // Exchange endpoints
   static const String exchangeInfo = '$baseUrl/exchange/info';
   static const String exchangeMap = '$baseUrl/exchange/map';
+  static const String exchangeAssets = '$baseUrl/exchange/assets';
   static String getExchangeInfoById(int id) => '$exchangeInfo?id=$id';
+  static String getExchangeAssetsById(int id) => '$exchangeAssets?id=$id';
 
 }
