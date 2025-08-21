@@ -2,9 +2,6 @@
 
 part of 'exchange_model.dart';
 
-// **************************************************************************
-// JsonSerializableGenerator
-// **************************************************************************
 
 ExchangeModel _$ExchangeModelFromJson(Map<String, dynamic> json) =>
     ExchangeModel(

@@ -11,6 +11,12 @@ import '../features/list_exchanges/presentation/bloc/exchange_bloc.dart';
 import '../features/detail_exchanges/presentation/bloc/detail_exchange_bloc.dart';
 import '../features/detail_exchanges/data/datasources/exchange_remote_data_source_impl.dart' as detail_ds_impl;
 import '../features/detail_exchanges/data/repositories/exchange_repository_impl.dart' as detail_repo_impl;
+import '../features/detail_exchanges/data/datasources/exchange_asset_remote_data_source_impl.dart';
+import '../features/detail_exchanges/data/repositories/exchange_asset_repository_impl.dart';
+import '../features/detail_exchanges/domain/repositories/exchange_asset_repository.dart';
+import '../features/detail_exchanges/domain/usecases/get_exchange_assets.dart';
+import '../features/detail_exchanges/presentation/bloc/exchange_assets_bloc.dart';
+import '../features/detail_exchanges/presentation/cubit/exchange_assets_cubit.dart';
 
 class DependencyInjection {
 
@@ -49,5 +55,23 @@ class DependencyInjection {
             ),
           ),
         ),
+      );
+
+  // Exchange Assets dependencies
+  static ExchangeAssetRemoteDataSourceImpl get exchangeAssetRemoteDataSource =>
+      ExchangeAssetRemoteDataSourceImpl(networkService);
+
+  static ExchangeAssetRepository get exchangeAssetRepository =>
+      ExchangeAssetRepositoryImpl(exchangeAssetRemoteDataSource);
+
+  static GetExchangeAssets get getExchangeAssets =>
+      GetExchangeAssets(exchangeAssetRepository);
+
+  static ExchangeAssetsBloc get exchangeAssetsBloc => ExchangeAssetsBloc(
+        getExchangeAssets: getExchangeAssets,
+      );
+
+  static ExchangeAssetsCubit get exchangeAssetsCubit => ExchangeAssetsCubit(
+        getExchangeAssets: getExchangeAssets,
       );
 }

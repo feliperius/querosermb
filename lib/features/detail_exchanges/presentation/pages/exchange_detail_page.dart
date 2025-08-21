@@ -8,11 +8,14 @@ import 'package:querosermb/core/theme/app_text_styles.dart';
 import 'package:querosermb/features/detail_exchanges/presentation/bloc/detail_exchange_bloc.dart';
 import 'package:querosermb/features/detail_exchanges/presentation/bloc/detail_exchange_event.dart';
 import 'package:querosermb/features/detail_exchanges/presentation/bloc/detail_exchange_state.dart';
+import 'package:querosermb/features/detail_exchanges/presentation/bloc/exchange_assets_state.dart';
+import 'package:querosermb/features/detail_exchanges/presentation/cubit/exchange_assets_cubit.dart';
 import 'package:querosermb/features/list_exchanges/data/models/exchange_model.dart';
 import 'package:querosermb/features/list_exchanges/domain/entities/exchange.dart';
+import 'package:querosermb/features/detail_exchanges/domain/entities/exchange_asset.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ExchangeDetailScreen extends StatelessWidget {
+class ExchangeDetailScreen extends StatefulWidget {
   final int exchangeId;
   final ExchangeModel? initialExchangeModel;
 
@@ -21,6 +24,39 @@ class ExchangeDetailScreen extends StatelessWidget {
     required this.exchangeId,
     this.initialExchangeModel,
   });
+
+  @override
+  State<ExchangeDetailScreen> createState() => _ExchangeDetailScreenState();
+}
+
+class _ExchangeDetailScreenState extends State<ExchangeDetailScreen> {
+  late ExchangeAssetsCubit _assetsCubit;
+  bool _hasLoadedAssets = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _assetsCubit = DependencyInjection.exchangeAssetsCubit;
+    // Carrega os assets na inicialização da página
+    _loadAssetsOnInit();
+  }
+
+  void _loadAssetsOnInit() {
+    if (!_hasLoadedAssets) {
+      _hasLoadedAssets = true;
+      _assetsCubit.loadAssets(widget.exchangeId);
+    }
+  }
+
+  @override
+  void dispose() {
+    _assetsCubit.close();
+    super.dispose();
+  }
+
+  void _resetAssetsLoading() {
+    _hasLoadedAssets = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,30 +68,28 @@ class ExchangeDetailScreen extends StatelessWidget {
         foregroundColor: AppColors.textPrimary,
         elevation: 0,
       ),
-  body: BlocProvider<DetailExchangeBloc>(
-        create: (_) => DependencyInjection.detailExchangeBloc(exchangeId),
+      body: BlocProvider<DetailExchangeBloc>(
+        create: (_) => DependencyInjection.detailExchangeBloc(widget.exchangeId),
         child: BlocBuilder<DetailExchangeBloc, DetailExchangeState>(
           builder: (context, state) {
-            // On initial build, trigger load and render initial model if provided
             if (state is DetailExchangeInitial) {
-              context.read<DetailExchangeBloc>().add(LoadDetailExchange(exchangeId));
-              if (initialExchangeModel != null) {
-                return _buildContent(context, initialExchangeModel!.toEntity());
+              context.read<DetailExchangeBloc>().add(LoadDetailExchange(widget.exchangeId));
+              if (widget.initialExchangeModel != null) {
+                return _buildContent(context, widget.initialExchangeModel!.toEntity());
               }
               return _buildLoading();
             }
 
-            // While loading, prefer showing the passed initial model if available
             if (state is DetailExchangeLoading) {
-              if (initialExchangeModel != null) {
-                return _buildContent(context, initialExchangeModel!.toEntity());
+              if (widget.initialExchangeModel != null) {
+                return _buildContent(context, widget.initialExchangeModel!.toEntity());
               }
               return _buildLoading();
             }
 
             if (state is DetailExchangeError) {
-              if (initialExchangeModel != null) {
-                return _buildContent(context, initialExchangeModel!.toEntity());
+              if (widget.initialExchangeModel != null) {
+                return _buildContent(context, widget.initialExchangeModel!.toEntity());
               }
               return _buildError(context, state.message);
             }
@@ -77,97 +111,121 @@ class ExchangeDetailScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildSkeletonHeader(),
+          // Loading Header
+          _buildLoadingHeader(),
           const SizedBox(height: AppSizes.lg),
-          _buildSkeletonCard(height: 200),
+          
+          // Loading Stats Row
+          _buildLoadingStatsRow(),
           const SizedBox(height: AppSizes.lg),
-          _buildSkeletonCard(height: 120),
+          
+          // Loading Info Card
+          _buildSkeletonCard(height: 200, title: 'Informações'),
           const SizedBox(height: AppSizes.lg),
-          _buildSkeletonCard(height: 300),
+          
+          // Loading Fees Card
+          _buildSkeletonCard(height: 120, title: 'Taxas'),
+          const SizedBox(height: AppSizes.lg),
+          
+          // Loading Assets Card
+          _buildSkeletonCard(height: 300, title: 'Assets da Exchange'),
           const SizedBox(height: AppSizes.xl),
-          Center(
-            child: Container(
-              padding: const EdgeInsets.all(AppSizes.lg),
-              decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(AppSizes.radiusXl),
-                border: Border.all(
-                  color: AppColors.primary.withOpacity(0.3),
-                  width: AppSizes.borderThin,
-                ),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
-                      strokeWidth: 2,
-                    ),
-                  ),
-                  const SizedBox(width: AppSizes.md),
-                  Text(
-                    'Carregando detalhes da exchange...',
-                    style: AppTextStyles.bodyMedium.copyWith(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          
+          // Enhanced Loading Indicator
+          _buildEnhancedLoadingIndicator(),
         ],
       ),
     );
   }
 
-  Widget _buildSkeletonHeader() {
+  Widget _buildLoadingHeader() {
     return Container(
-      padding: const EdgeInsets.all(AppSizes.lg),
+      padding: const EdgeInsets.all(AppSizes.xl),
       decoration: BoxDecoration(
-        color: AppColors.cardBackground,
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            AppColors.primary.withOpacity(0.1),
+            AppColors.secondary.withOpacity(0.1),
+            AppColors.cardBackground,
+          ],
+        ),
         borderRadius: BorderRadius.circular(AppSizes.radiusXl),
         border: Border.all(
-          color: AppColors.border,
-          width: 0.5,
+          color: AppColors.primary.withOpacity(0.2),
+          width: 1,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.primary.withOpacity(0.1),
+            blurRadius: 20,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Row(
         children: [
-          // Logo skeleton
+          // Logo skeleton with shimmer
           Container(
-            width: 80,
-            height: 80,
+            width: 90,
+            height: 90,
             decoration: BoxDecoration(
-              color: AppColors.surface,
-              borderRadius: BorderRadius.circular(AppSizes.radiusLg),
+              borderRadius: BorderRadius.circular(AppSizes.radiusXl),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  AppColors.primary.withOpacity(0.2),
+                  AppColors.secondary.withOpacity(0.2),
+                ],
+              ),
+              border: Border.all(
+                color: AppColors.primary.withOpacity(0.4),
+                width: 2,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.primary.withOpacity(0.2),
+                  blurRadius: 10,
+                  offset: const Offset(0, 2),
+                ),
+              ],
             ),
             child: const _ShimmerEffect(),
           ),
-          const SizedBox(width: AppSizes.lg),
+          const SizedBox(width: AppSizes.xl),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Name skeleton
                 Container(
                   width: double.infinity,
-                  height: 24,
+                  height: 28,
                   decoration: BoxDecoration(
                     color: AppColors.surface,
                     borderRadius: BorderRadius.circular(AppSizes.radiusMd),
                   ),
                   child: const _ShimmerEffect(),
                 ),
-                const SizedBox(height: AppSizes.sm),
+                const SizedBox(height: AppSizes.md),
+                // ID skeleton
                 Container(
-                  width: 100,
-                  height: 20,
+                  width: 120,
+                  height: 32,
                   decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius: BorderRadius.circular(AppSizes.radiusMd),
+                    gradient: LinearGradient(
+                      colors: [
+                        AppColors.primary.withOpacity(0.1),
+                        AppColors.secondary.withOpacity(0.1),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(AppSizes.radiusLg),
+                    border: Border.all(
+                      color: AppColors.primary.withOpacity(0.3),
+                      width: 1,
+                    ),
                   ),
                   child: const _ShimmerEffect(),
                 ),
@@ -179,7 +237,201 @@ class ExchangeDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSkeletonCard({required double height}) {
+  Widget _buildLoadingStatsRow() {
+    return Row(
+      children: [
+        Expanded(child: _buildLoadingStatCard()),
+        const SizedBox(width: AppSizes.md),
+        Expanded(child: _buildLoadingStatCard()),
+        const SizedBox(width: AppSizes.md),
+        Expanded(child: _buildLoadingStatCard()),
+      ],
+    );
+  }
+
+  Widget _buildLoadingStatCard() {
+    return Container(
+      padding: const EdgeInsets.all(AppSizes.md),
+      decoration: BoxDecoration(
+        color: AppColors.primary.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(AppSizes.radiusLg),
+        border: Border.all(
+          color: AppColors.primary.withOpacity(0.3),
+          width: 1,
+        ),
+      ),
+      child: Column(
+        children: [
+          // Icon skeleton
+          Container(
+            width: 24,
+            height: 24,
+            decoration: BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+            ),
+            child: const _ShimmerEffect(),
+          ),
+          const SizedBox(height: AppSizes.sm),
+          // Value skeleton
+          Container(
+            width: 40,
+            height: 20,
+            decoration: BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+            ),
+            child: const _ShimmerEffect(),
+          ),
+          const SizedBox(height: AppSizes.xs),
+          // Label skeleton
+          Container(
+            width: 60,
+            height: 14,
+            decoration: BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+            ),
+            child: const _ShimmerEffect(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEnhancedLoadingIndicator() {
+    return Center(
+      child: Container(
+        padding: const EdgeInsets.all(AppSizes.xl),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              AppColors.primary.withOpacity(0.1),
+              AppColors.secondary.withOpacity(0.1),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(AppSizes.radiusXl),
+          border: Border.all(
+            color: AppColors.primary.withOpacity(0.3),
+            width: 2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primary.withOpacity(0.2),
+              blurRadius: 20,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Animated Loading Ring
+            SizedBox(
+              width: 60,
+              height: 60,
+              child: Stack(
+                children: [
+                  const CircularProgressIndicator(
+                    strokeWidth: 4,
+                    valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+                  ),
+                  Center(
+                    child: Icon(
+                      Icons.account_balance,
+                      color: AppColors.primary,
+                      size: 24,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: AppSizes.lg),
+            Text(
+              'Carregando Exchange',
+              style: AppTextStyles.titleMedium.copyWith(
+                color: AppColors.primary,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: AppSizes.sm),
+            Text(
+              'Buscando informações detalhadas...',
+              style: AppTextStyles.bodyMedium.copyWith(
+                color: AppColors.textSecondary,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: AppSizes.md),
+            // Loading Steps Indicator
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildLoadingStep(true, 'Dados'),
+                Container(
+                  width: 20,
+                  height: 2,
+                  margin: const EdgeInsets.symmetric(horizontal: AppSizes.sm),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(1),
+                  ),
+                ),
+                _buildLoadingStep(true, 'Assets'),
+                Container(
+                  width: 20,
+                  height: 2,
+                  margin: const EdgeInsets.symmetric(horizontal: AppSizes.sm),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(1),
+                  ),
+                ),
+                _buildLoadingStep(false, 'UI'),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoadingStep(bool isActive, String label) {
+    return Column(
+      children: [
+        Container(
+          width: 12,
+          height: 12,
+          decoration: BoxDecoration(
+            color: isActive ? AppColors.primary : AppColors.primary.withOpacity(0.3),
+            shape: BoxShape.circle,
+          ),
+          child: isActive
+              ? const SizedBox(
+                  width: 8,
+                  height: 8,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 1,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  ),
+                )
+              : null,
+        ),
+        const SizedBox(height: AppSizes.xs),
+        Text(
+          label,
+          style: AppTextStyles.bodySmall.copyWith(
+            color: isActive ? AppColors.primary : AppColors.textSecondary,
+            fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSkeletonCard({required double height, String? title}) {
     return Container(
       height: height,
       padding: const EdgeInsets.all(AppSizes.lg),
@@ -194,30 +446,78 @@ class ExchangeDetailScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 150,
-            height: 20,
-            decoration: BoxDecoration(
-              color: AppColors.surface,
-              borderRadius: BorderRadius.circular(AppSizes.radiusMd),
-            ),
-            child: const _ShimmerEffect(),
-          ),
-          const SizedBox(height: AppSizes.lg),
-          Expanded(
-            child: Column(
-              children: List.generate(3, (index) => Padding(
-                padding: EdgeInsets.only(bottom: AppSizes.md),
-                child: Container(
-                  width: double.infinity,
-                  height: 16,
+          if (title != null) ...[
+            Row(
+              children: [
+                Container(
+                  width: 24,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    color: AppColors.surface,
+                    borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+                  ),
+                  child: const _ShimmerEffect(),
+                ),
+                const SizedBox(width: AppSizes.sm),
+                Container(
+                  width: title.length * 8.0,
+                  height: 20,
                   decoration: BoxDecoration(
                     color: AppColors.surface,
                     borderRadius: BorderRadius.circular(AppSizes.radiusMd),
                   ),
                   child: const _ShimmerEffect(),
                 ),
-              )),
+              ],
+            ),
+            const SizedBox(height: AppSizes.lg),
+          ] else ...[
+            Container(
+              width: 150,
+              height: 20,
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                borderRadius: BorderRadius.circular(AppSizes.radiusMd),
+              ),
+              child: const _ShimmerEffect(),
+            ),
+            const SizedBox(height: AppSizes.lg),
+          ],
+          Expanded(
+            child: Column(
+              children: List.generate(
+                title == 'Assets da Exchange' ? 4 : 3,
+                (index) => Padding(
+                  padding: EdgeInsets.only(bottom: AppSizes.md),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          height: title == 'Assets da Exchange' ? 20 : 16,
+                          decoration: BoxDecoration(
+                            color: AppColors.surface,
+                            borderRadius: BorderRadius.circular(AppSizes.radiusMd),
+                          ),
+                          child: const _ShimmerEffect(),
+                        ),
+                      ),
+                      const SizedBox(width: AppSizes.md),
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          height: title == 'Assets da Exchange' ? 20 : 16,
+                          decoration: BoxDecoration(
+                            color: AppColors.surface,
+                            borderRadius: BorderRadius.circular(AppSizes.radiusMd),
+                          ),
+                          child: const _ShimmerEffect(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
         ],
@@ -249,7 +549,7 @@ class ExchangeDetailScreen extends StatelessWidget {
           const SizedBox(height: AppSizes.lg),
           ElevatedButton(
             onPressed: () {
-              context.read<DetailExchangeBloc>().add(LoadDetailExchange(exchangeId));
+              context.read<DetailExchangeBloc>().add(LoadDetailExchange(widget.exchangeId));
             },
             child: const Text('Tentar novamente'),
           ),
@@ -261,7 +561,9 @@ class ExchangeDetailScreen extends StatelessWidget {
   Widget _buildContent(BuildContext context, Exchange exchange) {
     return RefreshIndicator(
       onRefresh: () async {
-  context.read<DetailExchangeBloc>().add(LoadDetailExchange(exchangeId));
+        _resetAssetsLoading(); // Reset flag to allow assets to be reloaded
+        context.read<DetailExchangeBloc>().add(LoadDetailExchange(widget.exchangeId));
+        _assetsCubit.refreshAssets(exchange.id);
       },
       backgroundColor: AppColors.cardBackground,
       color: AppColors.primary,
@@ -282,6 +584,11 @@ class ExchangeDetailScreen extends StatelessWidget {
               const SizedBox(height: AppSizes.lg),
               _buildCurrenciesCard(exchange.currencies),
             ],
+            const SizedBox(height: AppSizes.lg),
+            BlocProvider<ExchangeAssetsCubit>.value(
+              value: _assetsCubit,
+              child: _buildExchangeAssetsCard(exchange.id),
+            ),
             // Extra space at bottom
             const SizedBox(height: AppSizes.xl),
           ],
@@ -835,6 +1142,276 @@ class ExchangeDetailScreen extends StatelessWidget {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     }
+  }
+
+  Widget _buildExchangeAssetsCard(int exchangeId) {
+    return Container(
+      padding: const EdgeInsets.all(AppSizes.lg),
+      decoration: BoxDecoration(
+        color: AppColors.cardBackground,
+        borderRadius: BorderRadius.circular(AppSizes.radiusXl),
+        border: Border.all(
+          color: AppColors.border,
+          width: 0.5,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.account_balance_wallet,
+                color: AppColors.primary,
+                size: AppSizes.iconLg,
+              ),
+              const SizedBox(width: AppSizes.sm),
+              Text(
+                'Assets da Exchange',
+                style: AppTextStyles.titleLarge.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSizes.lg),
+          BlocBuilder<ExchangeAssetsCubit, ExchangeAssetsState>(
+            builder: (context, state) {
+              // Assets já foram carregados na inicialização da página
+              if (state is ExchangeAssetsLoading) {
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppSizes.lg),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: AppColors.primary,
+                          ),
+                        ),
+                        const SizedBox(width: AppSizes.md),
+                        Text(
+                          'Carregando assets...',
+                          style: AppTextStyles.bodyMedium.copyWith(
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }
+
+              if (state is ExchangeAssetsError) {
+                return Container(
+                  padding: const EdgeInsets.all(AppSizes.lg),
+                  decoration: BoxDecoration(
+                    color: AppColors.error.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(AppSizes.radiusLg),
+                    border: Border.all(
+                      color: AppColors.error.withOpacity(0.3),
+                      width: 1,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.error_outline,
+                            color: AppColors.error,
+                            size: 20,
+                          ),
+                          const SizedBox(width: AppSizes.sm),
+                          Expanded(
+                            child: Text(
+                              'Erro ao carregar assets',
+                              style: AppTextStyles.bodyMedium.copyWith(
+                                color: AppColors.error,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: AppSizes.sm),
+                      Text(
+                        state.message,
+                        style: AppTextStyles.bodySmall.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
+                      const SizedBox(height: AppSizes.md),
+                      ElevatedButton(
+                        onPressed: () {
+                          _resetAssetsLoading();
+                          context.read<ExchangeAssetsCubit>().loadAssets(exchangeId);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primary,
+                          foregroundColor: Colors.white,
+                        ),
+                        child: const Text('Tentar novamente'),
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+              if (state is ExchangeAssetsEmpty) {
+                return Container(
+                  padding: const EdgeInsets.all(AppSizes.lg),
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.inbox_outlined,
+                        size: 48,
+                        color: AppColors.textSecondary.withOpacity(0.5),
+                      ),
+                      const SizedBox(height: AppSizes.md),
+                      Text(
+                        'Nenhum asset encontrado',
+                        style: AppTextStyles.bodyLarge.copyWith(
+                          color: AppColors.textSecondary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: AppSizes.sm),
+                      Text(
+                        'Esta exchange não possui assets disponíveis no momento.',
+                        style: AppTextStyles.bodyMedium.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+              if (state is ExchangeAssetsLoaded) {
+                final assets = state.assets;
+                return Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSizes.md,
+                        vertical: AppSizes.sm,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(AppSizes.radiusLg),
+                        border: Border.all(
+                          color: AppColors.primary.withOpacity(0.3),
+                          width: 1,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.check_circle,
+                            size: 16,
+                            color: AppColors.primary,
+                          ),
+                          const SizedBox(width: AppSizes.xs),
+                          Text(
+                            '${assets.length} assets encontrados',
+                            style: AppTextStyles.bodyMedium.copyWith(
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: AppSizes.lg),
+                    ...assets.map((asset) => _buildAssetItem(asset)),
+                  ],
+                );
+              }
+
+              return Container(
+                padding: const EdgeInsets.all(AppSizes.lg),
+                child: Text(
+                  'Estado não reconhecido',
+                  style: AppTextStyles.bodyMedium.copyWith(
+                    color: AppColors.textSecondary,
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAssetItem(ExchangeAsset asset) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: AppSizes.md),
+      padding: const EdgeInsets.all(AppSizes.md),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppSizes.radiusLg),
+        border: Border.all(
+          color: AppColors.border,
+          width: 0.5,
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  asset.currency.name,
+                  style: AppTextStyles.bodyLarge.copyWith(
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: AppSizes.xs),
+                Text(
+                  asset.currency.symbol,
+                  style: AppTextStyles.bodySmall.copyWith(
+                    color: AppColors.textSecondary,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                '\$${asset.currency.priceUsd.toStringAsFixed(6)}',
+                style: AppTextStyles.bodyLarge.copyWith(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: AppSizes.xs),
+              Text(
+                'USD',
+                style: AppTextStyles.bodySmall.copyWith(
+                  color: AppColors.textSecondary,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
 

@@ -1,10 +1,14 @@
 import 'package:dio/dio.dart';
+import 'api_cache_service.dart';
 
 class NetworkService {
   final Dio _dio;
   final String _apiKey;
   DateTime? _lastRequestTime;
-  static const Duration _minRequestInterval = Duration(milliseconds: 1100);
+  static const Duration _minRequestInterval = Duration(milliseconds: 2000);
+  static const int _maxConcurrentRequests = 2;
+  int _activeRequests = 0;
+  final ApiCacheService _cache = ApiCacheService();
 
   NetworkService({
     required Dio dio,
@@ -24,6 +28,11 @@ class NetworkService {
   }
 
   Future<void> _enforceRateLimit() async {
+    // Wait if we have too many concurrent requests
+    while (_activeRequests >= _maxConcurrentRequests) {
+      await Future.delayed(Duration(milliseconds: 500));
+    }
+    
     if (_lastRequestTime != null) {
       final timeSinceLastRequest = DateTime.now().difference(_lastRequestTime!);
       if (timeSinceLastRequest < _minRequestInterval) {
@@ -32,30 +41,81 @@ class NetworkService {
       }
     }
     _lastRequestTime = DateTime.now();
+    _activeRequests++;
+  }
+
+  void _releaseRequest() {
+    if (_activeRequests > 0) {
+      _activeRequests--;
+    }
   }
 
   Future<Response> get(
     String url, {
     Map<String, dynamic>? queryParameters,
     int maxRetries = 3,
+    bool useCache = true,
   }) async {
+    // Check cache first
+    if (useCache) {
+      final cachedResponse = _cache.get<Map<String, dynamic>>(
+        url, 
+        params: queryParameters,
+      );
+      if (cachedResponse != null) {
+        return Response(
+          requestOptions: RequestOptions(path: url),
+          data: cachedResponse,
+          statusCode: 200,
+        );
+      }
+    }
+
     for (int attempt = 0; attempt <= maxRetries; attempt++) {
       try {
         await _enforceRateLimit();
-        return await _dio.get(url, queryParameters: queryParameters);
+        final response = await _dio.get(url, queryParameters: queryParameters);
+        _releaseRequest();
+        
+        // Cache successful response
+        if (useCache && response.statusCode == 200 && response.data != null) {
+          _cache.set(
+            url,
+            response.data,
+            params: queryParameters,
+            cacheDuration: Duration(minutes: 5),
+          );
+        }
+        
+        return response;
       } on DioException catch (e) {
+        _releaseRequest();
         final exception = _handleDioError(e);
         
+        // Cache rate limit errors for longer
+        if (e.response?.statusCode == 429) {
+          _cache.set(
+            url,
+            {'error': 'rate_limited'},
+            params: queryParameters,
+            isRateLimited: true,
+          );
+        }
+        
         if (attempt < maxRetries && _shouldRetry(e)) {
-          final backoffDelay = Duration(seconds: (attempt + 1) * 2);
+          final backoffDelay = Duration(seconds: (attempt + 1) * 3);
           await Future.delayed(backoffDelay);
           continue;
         }
         
         throw exception;
+      } catch (e) {
+        _releaseRequest();
+        rethrow;
       }
     }
     
+    _releaseRequest();
     throw Exception('Max retries exceeded');
   }
 
@@ -68,24 +128,31 @@ class NetworkService {
     for (int attempt = 0; attempt <= maxRetries; attempt++) {
       try {
         await _enforceRateLimit();
-        return await _dio.post(
+        final response = await _dio.post(
           url,
           data: data,
           queryParameters: queryParameters,
         );
+        _releaseRequest();
+        return response;
       } on DioException catch (e) {
+        _releaseRequest();
         final exception = _handleDioError(e);
         
         if (attempt < maxRetries && _shouldRetry(e)) {
-          final backoffDelay = Duration(seconds: (attempt + 1) * 2);
+          final backoffDelay = Duration(seconds: (attempt + 1) * 3);
           await Future.delayed(backoffDelay);
           continue;
         }
         
         throw exception;
+      } catch (e) {
+        _releaseRequest();
+        rethrow;
       }
     }
     
+    _releaseRequest();
     throw Exception('Max retries exceeded');
   }
 

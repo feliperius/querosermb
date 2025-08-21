@@ -94,9 +94,8 @@ class ExchangeRemoteDataSourceImpl implements ExchangeRemoteDataSource {
 
     try {
       final exchangeData = await _fetchExchangeInfo(id);
-      final currencies = await _fetchExchangeCurrencies(id);
 
-      final exchange = _buildExchangeModel(exchangeData, currencies);
+      final exchange = _buildExchangeModel(exchangeData);
       
       _cacheService.set(cacheKey, exchange, duration: _detailCacheDuration);
       return exchange;
@@ -111,17 +110,6 @@ class ExchangeRemoteDataSourceImpl implements ExchangeRemoteDataSource {
     return data[id.toString()] as Map<String, dynamic>;
   }
 
-  Future<List<CurrencyModel>> _fetchExchangeCurrencies(int id) async {
-    try {
-      final response = await _networkService.get(ApiUrls.getExchangeAssetsById(id));
-      final data = response.data['data'] as Map<String, dynamic>;
-      final assets = data[id.toString()] as List<dynamic>;
-      
-      return assets.map((asset) => _buildCurrencyModel(asset)).toList();
-    } catch (_) {
-      return <CurrencyModel>[];
-    }
-  }
 
   CurrencyModel _buildCurrencyModel(dynamic asset) {
     return CurrencyModel(
@@ -131,8 +119,7 @@ class ExchangeRemoteDataSourceImpl implements ExchangeRemoteDataSource {
   }
 
   ExchangeModel _buildExchangeModel(
-    Map<String, dynamic> infoData, 
-    List<CurrencyModel> currencies,
+    Map<String, dynamic> infoData,
   ) {
     return ExchangeModel(
       id: infoData['id'] as int,
@@ -144,7 +131,6 @@ class ExchangeRemoteDataSourceImpl implements ExchangeRemoteDataSource {
       website: _extractWebsiteFromUrls(infoData['urls']),
       makerFee: (infoData['maker_fee'] as num?)?.toDouble(),
       takerFee: (infoData['taker_fee'] as num?)?.toDouble(),
-      currencies: currencies,
     );
   }
 
