@@ -136,22 +136,11 @@ flutter test --reporter=expanded
    ```
 3. **Execute o aplicativo**
    ```bash
-   # Para desenvolvimento
    flutter run
-   
-   # Para release
-   flutter run --release
    ```
 
 ### 👨🏻‍💻 Sobre mim
 Desenvolvedor Mobile com **10+ anos de experiência**, entusiasta do mundo cripto e apaixonado por tecnologia. Já trabalhei em aplicativos de grandes empresas brasileiras como **PagBank**, **XP**, **Rico**, **Caixa Seguros** entre outras.
-
-### 💼 Experiência Técnica
-- 📱 **Mobile**: Flutter, React Native, iOS (Swift), Android (Kotlin)
-- 🏗️ **Arquitetura**: Clean Architecture, MVVM, MVI, Redux
-- 🎯 **Estado**: BLoC, Provider, Riverpod, MobX
-- 🧪 **Testes**: Unit, Widget, Integration, TDD
-- 🔧 **DevOps**: CI/CD, Firebase, AWS, Docker
 
 ### 🌟 Por que Mercado Bitcoin?
 Estou **entusiasmado** com a oportunidade de contribuir com o time do Mercado Bitcoin, aplicando minha experiência em fintech e paixão por criptomoedas para construir produtos inovadores que transformem o mercado brasileiro.
