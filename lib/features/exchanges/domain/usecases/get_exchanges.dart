@@ -6,7 +6,7 @@ class GetExchanges {
 
   GetExchanges(this.repository);
 
-  Future<List<Exchange>> call() async {
-    return await repository.getExchanges();
+  Future<List<Exchange>> call({int start = 0, int limit = 20}) async {
+    return await repository.getExchanges(start: start, limit: limit);
   }
 }

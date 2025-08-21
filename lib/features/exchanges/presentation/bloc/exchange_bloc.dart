@@ -13,6 +13,7 @@ class ExchangeBloc extends Bloc<ExchangeEvent, ExchangeState> {
     required this.getExchangeById,
   }) : super(ExchangeInitial()) {
     on<LoadExchanges>(_onLoadExchanges);
+    on<LoadMoreExchanges>(_onLoadMoreExchanges);
     on<LoadExchangeById>(_onLoadExchangeById);
   }
 
@@ -22,10 +23,37 @@ class ExchangeBloc extends Bloc<ExchangeEvent, ExchangeState> {
   ) async {
     emit(ExchangeLoading());
     try {
-      final exchanges = await getExchanges();
-      emit(ExchangeLoaded(exchanges));
+      final exchanges = await getExchanges(limit: event.limit, start: 1);
+      emit(ExchangeLoaded(exchanges, hasReachedMax: exchanges.length < event.limit));
     } catch (e) {
       emit(ExchangeError(e.toString()));
+    }
+  }
+
+  Future<void> _onLoadMoreExchanges(
+    LoadMoreExchanges event,
+    Emitter<ExchangeState> emit,
+  ) async {
+    final currentState = state;
+    if (currentState is ExchangeLoaded) {
+      if (currentState.hasReachedMax) return;
+      
+      emit(ExchangeLoadingMore(currentState.exchanges));
+      
+      try {
+        final newExchanges = await getExchanges(
+          limit: event.limit,
+          start: currentState.exchanges.length + 1,
+        );
+        
+        final allExchanges = currentState.exchanges + newExchanges;
+        emit(ExchangeLoaded(
+          allExchanges, 
+          hasReachedMax: newExchanges.length < event.limit,
+        ));
+      } catch (e) {
+        emit(ExchangeError(e.toString()));
+      }
     }
   }
 

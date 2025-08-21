@@ -38,6 +38,26 @@ class ExchangeModel {
 
   Map<String, dynamic> toJson() => _$ExchangeModelToJson(this);
 
+  factory ExchangeModel.fromInfo(Map<String, dynamic> json) {
+    final urls = json['urls'] as Map<String, dynamic>?;
+    final website = (urls?['website'] as List?)?.isNotEmpty == true
+        ? urls!['website'].first as String
+        : null;
+
+    return ExchangeModel(
+      id: json['id'] as int,
+      name: json['name'] as String? ?? '',
+      logo: json['logo'] as String?,
+      spotVolumeUsd: (json['spot_volume_usd'] as num?)?.toDouble(),
+      dateLaunched: json['date_launched'] as String?,
+      description: json['description'] as String?,
+      website: website,
+      makerFee: (json['maker_fee'] as num?)?.toDouble(),
+      takerFee: (json['taker_fee'] as num?)?.toDouble(),
+      currencies: const [],
+    );
+  }
+
   Exchange toEntity() {
     return Exchange(
       id: id,

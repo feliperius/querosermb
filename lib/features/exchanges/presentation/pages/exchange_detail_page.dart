@@ -9,10 +9,12 @@ import '../bloc/exchange_state.dart';
 
 class ExchangeDetailPage extends StatelessWidget {
   final int exchangeId;
+  final ExchangeBloc? exchangeBloc;
 
   const ExchangeDetailPage({
     super.key,
     required this.exchangeId,
+    this.exchangeBloc,
   });
 
   @override
@@ -23,9 +25,10 @@ class ExchangeDetailPage extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: BlocBuilder<ExchangeBloc, ExchangeState>(
+        bloc: exchangeBloc ?? context.read<ExchangeBloc>(),
         builder: (context, state) {
           if (state is ExchangeInitial) {
-            context.read<ExchangeBloc>().add(LoadExchangeById(exchangeId));
+            (exchangeBloc ?? context.read<ExchangeBloc>()).add(LoadExchangeById(exchangeId));
             return const Center(child: CircularProgressIndicator());
           }
           
@@ -95,7 +98,7 @@ class ExchangeHeader extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
-            if (exchange.logo != null)
+            if (exchange.logo != null && exchange.logo!.isNotEmpty)
               CachedNetworkImage(
                 imageUrl: exchange.logo!,
                 width: 60,

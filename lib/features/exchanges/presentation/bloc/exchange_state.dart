@@ -12,13 +12,23 @@ class ExchangeInitial extends ExchangeState {}
 
 class ExchangeLoading extends ExchangeState {}
 
-class ExchangeLoaded extends ExchangeState {
-  final List<Exchange> exchanges;
+class ExchangeLoadingMore extends ExchangeState {
+  final List<Exchange> currentExchanges;
 
-  const ExchangeLoaded(this.exchanges);
+  const ExchangeLoadingMore(this.currentExchanges);
 
   @override
-  List<Object> get props => [exchanges];
+  List<Object> get props => [currentExchanges];
+}
+
+class ExchangeLoaded extends ExchangeState {
+  final List<Exchange> exchanges;
+  final bool hasReachedMax;
+
+  const ExchangeLoaded(this.exchanges, {this.hasReachedMax = false});
+
+  @override
+  List<Object> get props => [exchanges, hasReachedMax];
 }
 
 class ExchangeError extends ExchangeState {

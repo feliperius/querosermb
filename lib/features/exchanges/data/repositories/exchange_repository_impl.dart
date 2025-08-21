@@ -8,9 +8,9 @@ class ExchangeRepositoryImpl implements ExchangeRepository {
   ExchangeRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<List<Exchange>> getExchanges() async {
+  Future<List<Exchange>> getExchanges({int start = 0, int limit = 20}) async {
     try {
-      final exchangeModels = await remoteDataSource.getExchanges();
+      final exchangeModels = await remoteDataSource.getExchanges(start: start, limit: limit);
       return exchangeModels.map((model) => model.toEntity()).toList();
     } catch (e) {
       throw Exception('Failed to get exchanges: $e');
