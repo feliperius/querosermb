@@ -1,41 +1,50 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primary = Color(0xFFFF6B35);
-  static const Color primaryDark = Color(0xFFE85A2B);
-  static const Color primaryLight = Color(0xFFFF8A65);
+  // Orange accent colors
+  static const Color primary = Color(0xFFFF9500);
+  static const Color primaryDark = Color(0xFFE6850E);
+  static const Color primaryLight = Color(0xFFFFAD33);
   
-  static const Color secondary = Color(0xFF2196F3);
-  static const Color secondaryDark = Color(0xFF1976D2);
-  static const Color secondaryLight = Color(0xFF64B5F6);
+  // Secondary colors (blue accent)
+  static const Color secondary = Color(0xFF007AFF);
+  static const Color secondaryDark = Color(0xFF0051D5);
+  static const Color secondaryLight = Color(0xFF66AAFF);
   
-  static const Color background = Color(0xFFFAFAFA);
-  static const Color surface = Color(0xFFFFFFFF);
-  static const Color error = Color(0xFFE53E3E);
-  static const Color warning = Color(0xFFED8936);
-  static const Color success = Color(0xFF38A169);
-  static const Color info = Color(0xFF3182CE);
+  // Dark theme background colors
+  static const Color background = Color(0xFF000000);
+  static const Color surface = Color(0xFF1C1C1E);
+  static const Color surfaceVariant = Color(0xFF2C2C2E);
+  static const Color surfaceBright = Color(0xFF3A3A3C);
+  static const Color error = Color(0xFFFF453A);
+  static const Color warning = Color(0xFFFF9F0A);
+  static const Color success = Color(0xFF30D158);
+  static const Color info = Color(0xFF64D2FF);
   
-  static const Color textPrimary = Color(0xFF1A202C);
-  static const Color textSecondary = Color(0xFF4A5568);
-  static const Color textMuted = Color(0xFF718096);
-  static const Color textDisabled = Color(0xFFA0AEC0);
+  // Dark theme text colors
+  static const Color textPrimary = Color(0xFFFFFFFF);
+  static const Color textSecondary = Color(0xFFAAAAAA);
+  static const Color textMuted = Color(0xFF8E8E93);
+  static const Color textDisabled = Color(0xFF636366);
   
-  static const Color border = Color(0xFFE2E8F0);
-  static const Color borderDark = Color(0xFFCBD5E0);
-  static const Color divider = Color(0xFFEDF2F7);
+  // Dark theme borders
+  static const Color border = Color(0xFF38383A);
+  static const Color borderDark = Color(0xFF2C2C2E);
+  static const Color divider = Color(0xFF38383A);
   
-  static const Color cardBackground = Color(0xFFFFFFFF);
-  static const Color cardShadow = Color(0x0F000000);
+  // Card colors for dark theme
+  static const Color cardBackground = Color(0xFF3A3A3C);
+  static const Color cardShadow = Color(0x33000000);
   
-  static const Color green = Color(0xFF10B981);
-  static const Color red = Color(0xFFEF4444);
-  static const Color blue = Color(0xFF3B82F6);
-  static const Color yellow = Color(0xFFF59E0B);
-  static const Color purple = Color(0xFF8B5CF6);
-  static const Color pink = Color(0xFFEC4899);
-  static const Color indigo = Color(0xFF6366F1);
-  static const Color gray = Color(0xFF6B7280);
+  // Accent colors
+  static const Color green = Color(0xFF30D158);
+  static const Color red = Color(0xFFFF453A);
+  static const Color blue = Color(0xFF007AFF);
+  static const Color yellow = Color(0xFFFFD60A);
+  static const Color purple = Color(0xFFBF5AF2);
+  static const Color pink = Color(0xFFFF2D92);
+  static const Color indigo = Color(0xFF5E5CE6);
+  static const Color gray = Color(0xFF8E8E93);
   
   static const Color transparent = Colors.transparent;
   static const Color white = Color(0xFFFFFFFF);

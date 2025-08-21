@@ -8,21 +8,45 @@ class AppTheme {
   static ThemeData get theme {
     return ThemeData(
       useMaterial3: true,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primary,
+      brightness: Brightness.dark,
+      colorScheme: ColorScheme.dark(
+        primary: AppColors.primary,
+        secondary: AppColors.secondary,
+        surface: AppColors.surface,
+        background: AppColors.background,
+        error: AppColors.error,
+        onPrimary: AppColors.black,
+        onSecondary: AppColors.white,
+        onSurface: AppColors.textPrimary,
+        onBackground: AppColors.textPrimary,
+        onError: AppColors.white,
       ),
       
       appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.primary,
-        foregroundColor: AppColors.white,
+        backgroundColor: AppColors.background,
+        foregroundColor: AppColors.textPrimary,
         elevation: 0,
-        centerTitle: true,
+        centerTitle: false,
         systemOverlayStyle: SystemUiOverlayStyle.light,
+        titleTextStyle: TextStyle(
+          color: AppColors.textPrimary,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       
-      cardTheme: const CardThemeData(
+      cardTheme: CardThemeData(
         elevation: AppSizes.cardElevation,
-        margin: EdgeInsets.symmetric(
+        color: AppColors.cardBackground,
+        shadowColor: AppColors.cardShadow,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppSizes.radiusLg),
+          side: BorderSide(
+            color: AppColors.border,
+            width: 0.5,
+          ),
+        ),
+        margin: const EdgeInsets.symmetric(
           horizontal: AppSizes.marginMd,
           vertical: AppSizes.marginSm,
         ),
@@ -31,12 +55,32 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
-          foregroundColor: AppColors.white,
+          foregroundColor: AppColors.black,
           minimumSize: const Size(0, AppSizes.buttonHeightMd),
+          elevation: 8,
+          shadowColor: AppColors.primary.withOpacity(0.3),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSizes.radiusLg),
           ),
         ),
+      ),
+      
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: AppColors.primary,
+          textStyle: const TextStyle(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      
+      iconTheme: const IconThemeData(
+        color: AppColors.primary,
+      ),
+      
+      dividerTheme: const DividerThemeData(
+        color: AppColors.divider,
+        thickness: 0.5,
       ),
       
       textTheme: const TextTheme(

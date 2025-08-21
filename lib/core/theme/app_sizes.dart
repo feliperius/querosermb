@@ -42,6 +42,17 @@ class AppSizes {
   static const double iconXl = 32.0;
   static const double iconXxl = 48.0;
   
+  // Avatar/Logo sizes
+  static const double avatarSm = 32.0;
+  static const double avatarMd = 48.0;
+  static const double avatarLg = 56.0;
+  static const double avatarXl = 64.0;
+  
+  // Loading indicator sizes
+  static const double loadingXs = 16.0;
+  static const double loadingMd = 20.0;
+  static const double loadingLg = 24.0;
+  
   // Border radius
   static const double radiusXs = 2.0;
   static const double radiusSm = 4.0;
@@ -50,6 +61,16 @@ class AppSizes {
   static const double radiusXl = 16.0;
   static const double radiusXxl = 24.0;
   static const double radiusRound = 50.0;
+  
+  // Border width
+  static const double borderThin = 1.0;
+  static const double borderMedium = 2.0;
+  static const double borderThick = 3.0;
+  
+  // Opacity values
+  static const double opacityLow = 0.1;
+  static const double opacityMedium = 0.3;
+  static const double opacityHigh = 0.6;
   
   // Button sizes
   static const double buttonHeightSm = 32.0;
@@ -72,6 +93,18 @@ class AppSizes {
   // Divider
   static const double dividerThickness = 1.0;
   static const double dividerIndent = 16.0;
+  
+  // Text formatting constants
+  static const int currencyDecimalPlaces = 1;
+  static const int currencyFullDecimalPlaces = 2;
+  static const int datePadLength = 2;
+  static const String datePadChar = '0';
+  
+  // Currency thresholds
+  static const double trillionThreshold = 1e12;
+  static const double billionThreshold = 1e9;
+  static const double millionThreshold = 1e6;
+  static const double thousandThreshold = 1e3;
   
   // Breakpoints for responsive design
   static const double mobileBreakpoint = 600.0;
