@@ -206,6 +206,7 @@ class ExchangeVolumeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (exchange.spotVolumeUsd != null) {
       return Container(
+        width: double.infinity, // Ocupa toda a largura disponível
         padding: const EdgeInsets.symmetric(
           horizontal: AppSizes.md,
           vertical: AppSizes.sm,
@@ -219,7 +220,6 @@ class ExchangeVolumeWidget extends StatelessWidget {
           ),
         ),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               Icons.trending_up,
@@ -227,14 +227,15 @@ class ExchangeVolumeWidget extends StatelessWidget {
               color: AppColors.primary,
             ),
             const SizedBox(width: AppSizes.xs),
-            Flexible(
+            Expanded( // Usa Expanded ao invés de Flexible para ocupar espaço restante
               child: Text(
                 AppStrings.formatVolume(exchange.spotVolumeUsd),
                 style: AppTextStyles.bodyMedium.copyWith(
                   color: AppColors.primary,
                   fontWeight: FontWeight.w600,
                 ),
-                overflow: TextOverflow.ellipsis,
+                overflow: TextOverflow.fade, // Usa fade ao invés de ellipsis
+                softWrap: false, // Não quebra linha
                 maxLines: 1,
               ),
             ),
@@ -243,6 +244,7 @@ class ExchangeVolumeWidget extends StatelessWidget {
       );
     } else {
       return Container(
+        width: double.infinity, // Mantém consistência no tamanho
         padding: const EdgeInsets.symmetric(
           horizontal: AppSizes.md,
           vertical: AppSizes.sm,
@@ -252,7 +254,6 @@ class ExchangeVolumeWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppSizes.radiusLg),
         ),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               Icons.help_outline,
@@ -260,33 +261,20 @@ class ExchangeVolumeWidget extends StatelessWidget {
               color: AppColors.textMuted,
             ),
             const SizedBox(width: AppSizes.xs),
-            Flexible(
+            Expanded( // Usa Expanded para consistência
               child: Text(
                 AppStrings.formatVolume(null),
                 style: AppTextStyles.bodyMedium.copyWith(
                   color: AppColors.textMuted,
                 ),
-                overflow: TextOverflow.ellipsis,
+                overflow: TextOverflow.fade,
+                softWrap: false,
                 maxLines: 1,
               ),
             ),
           ],
         ),
       );
-    }
-  }
-
-  String _formatCurrency(double value) {
-    if (value >= AppSizes.trillionThreshold) {
-      return '\$${(value / AppSizes.trillionThreshold).toStringAsFixed(AppSizes.currencyDecimalPlaces)}T';
-    } else if (value >= AppSizes.billionThreshold) {
-      return '\$${(value / AppSizes.billionThreshold).toStringAsFixed(AppSizes.currencyDecimalPlaces)}B';
-    } else if (value >= AppSizes.millionThreshold) {
-      return '\$${(value / AppSizes.millionThreshold).toStringAsFixed(AppSizes.currencyDecimalPlaces)}M';
-    } else if (value >= AppSizes.thousandThreshold) {
-      return '\$${(value / AppSizes.thousandThreshold).toStringAsFixed(AppSizes.currencyDecimalPlaces)}K';
-    } else {
-      return '\$${value.toStringAsFixed(AppSizes.currencyFullDecimalPlaces)}';
     }
   }
 }

@@ -96,17 +96,27 @@ void main() {
       group('formatCurrency', () {
         test('should format currency correctly', () {
           final result = AppStrings.formatCurrency(1234.56);
-          expect(result, '\$1234.56');
+          expect(result, '\$1.2K');
         });
 
         test('should format large numbers correctly', () {
           final result = AppStrings.formatCurrency(1000000.0);
-          expect(result, '\$1000000.00');
+          expect(result, '\$1.00M');
         });
 
         test('should handle decimal places correctly', () {
           final result = AppStrings.formatCurrency(99.9);
           expect(result, '\$99.90');
+        });
+
+        test('should format billions correctly', () {
+          final result = AppStrings.formatCurrency(2500000000.0);
+          expect(result, '\$2.50B');
+        });
+
+        test('should format trillions correctly', () {
+          final result = AppStrings.formatCurrency(1500000000000.0);
+          expect(result, '\$1.50T');
         });
       });
 
@@ -127,7 +137,7 @@ void main() {
       group('formatVolume', () {
         test('should format volume with value', () {
           final result = AppStrings.formatVolume(1000000.0);
-          expect(result, 'Vol: \$1000000.00');
+          expect(result, 'Vol: \$1.00M');
         });
 
         test('should return N/A for null volume', () {
@@ -138,6 +148,11 @@ void main() {
         test('should handle zero volume', () {
           final result = AppStrings.formatVolume(0.0);
           expect(result, 'Vol: \$0.00');
+        });
+
+        test('should format billions volume correctly', () {
+          final result = AppStrings.formatVolume(5600000000.0);
+          expect(result, 'Vol: \$5.60B');
         });
       });
     });
