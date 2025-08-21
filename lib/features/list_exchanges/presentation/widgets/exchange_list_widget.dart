@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/navigation/app_router.dart';
-import '../../../../core/theme/theme.dart';
-import '../../domain/entities/exchange.dart';
-import '../../data/models/exchange_model.dart';
-import '../bloc/exchange_bloc.dart';
-import '../bloc/exchange_event.dart';
-import 'exchange_list_item.dart';
-import 'loading_widgets.dart';
+import 'package:querosermb/core/navigation/app_router.dart';
+import 'package:querosermb/core/theme/app_sizes.dart';
+import 'package:querosermb/features/list_exchanges/data/models/exchange_model.dart';
+import 'package:querosermb/features/list_exchanges/domain/entities/exchange.dart';
+import 'package:querosermb/features/list_exchanges/presentation/bloc/exchange_bloc.dart';
+import 'package:querosermb/features/list_exchanges/presentation/bloc/exchange_event.dart';
+import 'package:querosermb/features/list_exchanges/presentation/widgets/exchange_list_item.dart';
+import 'package:querosermb/features/list_exchanges/presentation/widgets/loading_widgets.dart';
 
 class ExchangeListWidget extends StatelessWidget {
   final List<Exchange> exchanges;

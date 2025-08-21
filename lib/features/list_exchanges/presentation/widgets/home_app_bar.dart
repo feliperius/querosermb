@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/theme/theme.dart';
+import '../../../../core/strings/app_strings.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_sizes.dart';
+import '../../../../core/theme/app_text_styles.dart';
 import '../bloc/exchange_bloc.dart';
 import '../bloc/exchange_event.dart';
 
@@ -28,8 +31,8 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       child: AppBar(
         title: Text(
-          'Desafio MB',
-          style: AppTextStyles.headlineSmall.copyWith(
+          AppStrings.homeTitle,
+          style: AppTextStyles.headlineMedium.copyWith(
             fontWeight: FontWeight.bold,
             color: AppColors.textPrimary,
           ),
@@ -47,7 +50,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               color: AppColors.primary,
               size: AppSizes.iconLg,
             ),
-            tooltip: 'Atualizar',
+            tooltip: AppStrings.refreshTooltip,
           ),
         ],
       ),

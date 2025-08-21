@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme/theme.dart';
+import '../../../../core/strings/app_strings.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_sizes.dart';
+import '../../../../core/theme/app_text_styles.dart';
 
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({super.key});
@@ -32,7 +35,7 @@ class LoadingWidget extends StatelessWidget {
           ),
           const SizedBox(height: AppSizes.lg),
           Text(
-            'Carregando exchanges...',
+            AppStrings.loadingExchanges,
             style: AppTextStyles.bodyMedium.copyWith(
               color: AppColors.textSecondary,
               fontWeight: FontWeight.w500,

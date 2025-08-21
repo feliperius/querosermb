@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../../../core/theme/theme.dart';
-import '../../domain/entities/exchange.dart';
+import 'package:querosermb/core/strings/app_strings.dart';
+import 'package:querosermb/core/theme/app_colors.dart';
+import 'package:querosermb/core/theme/app_sizes.dart';
+import 'package:querosermb/core/theme/app_text_styles.dart';
+import 'package:querosermb/features/list_exchanges/domain/entities/exchange.dart';
 
 class ExchangeListItem extends StatelessWidget {
   final Exchange exchange;
@@ -226,7 +229,7 @@ class ExchangeVolumeWidget extends StatelessWidget {
             const SizedBox(width: AppSizes.xs),
             Flexible(
               child: Text(
-                'Volume: ${_formatCurrency(exchange.spotVolumeUsd!)}',
+                AppStrings.formatVolume(exchange.spotVolumeUsd),
                 style: AppTextStyles.bodyMedium.copyWith(
                   color: AppColors.primary,
                   fontWeight: FontWeight.w600,
@@ -259,7 +262,7 @@ class ExchangeVolumeWidget extends StatelessWidget {
             const SizedBox(width: AppSizes.xs),
             Flexible(
               child: Text(
-                'Volume: N/A',
+                AppStrings.formatVolume(null),
                 style: AppTextStyles.bodyMedium.copyWith(
                   color: AppColors.textMuted,
                 ),
@@ -333,7 +336,7 @@ class ExchangeDateWidget extends StatelessWidget {
           const SizedBox(width: AppSizes.xs),
           Flexible(
             child: Text(
-              'N/A',
+              AppStrings.notAvailable,
               style: AppTextStyles.bodySmall.copyWith(
                 color: AppColors.textMuted,
               ),

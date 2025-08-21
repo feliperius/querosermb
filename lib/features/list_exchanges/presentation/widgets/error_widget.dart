@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme/theme.dart';
+import '../../../../core/strings/app_strings.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_sizes.dart';
+import '../../../../core/theme/app_text_styles.dart';
 
 class ExchangeErrorWidget extends StatelessWidget {
   final String message;
@@ -20,8 +23,10 @@ class ExchangeErrorWidget extends StatelessWidget {
           const Icon(Icons.error, size: AppSizes.iconXxl, color: AppColors.error),
           const SizedBox(height: AppSizes.md),
           Text(
-            'Erro ao carregar exchanges',
-            style: AppTextStyles.headlineSmall,
+            AppStrings.errorLoadingExchanges,
+            style: AppTextStyles.headlineSmall.copyWith(
+              color: AppColors.textPrimary,
+            ),
           ),
           const SizedBox(height: AppSizes.sm),
           Text(
@@ -32,7 +37,7 @@ class ExchangeErrorWidget extends StatelessWidget {
           const SizedBox(height: AppSizes.md),
           ElevatedButton(
             onPressed: onRetry,
-            child: const Text('Tentar novamente'),
+            child: Text(AppStrings.tryAgain),
           ),
         ],
       ),
